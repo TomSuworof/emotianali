@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Start page</title>
+</head>
+<body>
+<div>
+    <h1>Welcome to Emotional assessment</h1>
+    <div>
+        <form action="/emotional_assessment">
+            <button>Начать эмоциональную оценку</button>
+        </form>
+    </div>
+    <div th:if="${show_personal_area}">
+        <form action="/personal_area">
+            <button>Личный кабинет</button>
+        </form>
+        <h6 th:text="${message}"></h6> <!---сообщени о том, что изменения вступят в силу после выхода из акканта--->
+    </div>
+    <div th:if="${show_logout}">
+        <form action="/logout">
+            <button>Выйти</button>
+        </form>
+    </div>
+    <div th:if="${show_admin_page}">
+        <form action="/admin">
+            <button>Админка</button>
+        </form>
+    </div>
+    <div th:if="${show_analyst_page}">
+        <form action="/analyst">
+            <button>Аналитика</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

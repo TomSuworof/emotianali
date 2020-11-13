@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Analytics</title>
+    <link rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Information</th>
+            <th>Roles</th>
+        </tr>
+        <tr th:each="user : ${allUsers}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td>Тут должна быть какая-то информация</td>
+            <td>
+                <p th:each="role: ${user.roles}"></p>
+            </td>
+            <td>
+                <form action="/analyst" method="post">
+                    <input type="hidden" name="userId" th:value="${user.id}"/>
+                    <input type="hidden" name="action" value="get_info"/>
+                    <button type="submit">Get info</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <a href="/">Главная</a>
+</div>
+</body>
+</html>

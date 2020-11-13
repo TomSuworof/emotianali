@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Личный кабинет</title>
+</head>
+
+<body>
+<div th:object="${currentUser}">
+    <form method="POST" th:modelAttribute="userForm">
+        <h2>Личный кабинет</h2>
+        <div>First name:
+            <br>
+            <label>
+                <input type="text" name="firstName" th:value="${currentUser.getFirstName()}" placeholder="First Name" autofocus="autofocus">
+            </label>
+        </div>
+        <div>Second name:
+            <br>
+            <label>
+                <input type="text" name="lastName" th:value="${currentUser.getLastName()}" placeholder="Last Name">
+            </label>
+        </div>
+        <div>Email:
+            <br>
+            <label>
+                <input type="email" name="email" th:value="${currentUser.getEmail()}" placeholder="Email">
+            </label>
+        </div>
+        <div>Username:
+            <br>
+            <label>
+                <input type="text" name="username" th:value="${currentUser.getUsername()}" placeholder="Username" disabled>
+            </label>
+        </div>
+        <div>
+            Password:
+            <br>
+            <div>
+                <label>
+                    <input type="password" name="password" placeholder="Current password">
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="password" name="passwordNew" placeholder="New password">
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="password" name="passwordNewConfirm" placeholder="Confirm your new password">
+                </label>
+            </div>
+            <p>Для подтверждения изменений нужно вести текущий пароль</p>
+            <p th:text="${error}"></p>
+        </div>
+        <button type="submit">Сохранить</button>
+    </form>
+    <a href="/">Главная</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Admin</title>
+    <link rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Roles</th>
+        </tr>
+            <tr th:each="user : ${allUsers}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.password}"></td>
+                <td>
+                    <ul th:each="role: ${user.roles}">
+                        <li th:text="${role.getName()}"></li>
+                    </ul>
+                </td>
+                <td>
+                    <form action="/admin" method="post">
+                        <input type="hidden" name="userId" th:value="${user.id}"/>
+                        <input type="hidden" name="action" value="delete"/>
+                        <button type="submit">Delete</button>
+                    </form>
+                    <form action="/admin" method="post">
+                        <input type="hidden" name="userId" th:value="${user.id}"/>
+                        <input type="hidden" name="action" value="make_analyst"/>
+                        <button type="submit">Make analyst</button>
+                    </form>
+                </td>
+            </tr>
+    </table>
+    <p th:text="${error}"></p>
+    <a href="/">Главная</a>
+</div>
+</body>
+</html>

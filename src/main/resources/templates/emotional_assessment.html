@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Эмоциональная оценка</title>
+</head>
+<body>
+<div>
+    <h2>Эмоциональная оценка <br> Только для залогинившихся пользователей.</h2>
+    <div></div>
+    <a href="/">Главная</a>
+    <div>
+<!--        <h1>We are using Telegram API, enter your phone here:</h1>-->
+<!--        <form action="/emotional_assessment_start">-->
+<!--            <label>-->
+<!--                <input name="phoneNumber" type="number" placeholder="Phone number">-->
+<!--            </label>-->
+<!--            <input type="submit">-->
+<!--        </form>-->
+        <form action="/emotional_assessment">
+            <label>
+                <input name="text" type="text" placeholder="type some text">
+            </label>
+            <input type="submit">
+        </form>
+        <div>
+            <h1 th:text="${text}"></h1>
+        </div>
+        <div>
+            <ul th:each="tone : ${result}">
+                <li><h2 th:text="${tone.getToneName()}"></h2></li>
+                <li><h3 th:text="${tone.getScore()}"></h3></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
