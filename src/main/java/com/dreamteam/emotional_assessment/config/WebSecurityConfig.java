@@ -32,16 +32,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // Доступ только для не зарегистрированных пользователей
                 .antMatchers("/registration").not().fullyAuthenticated()
-                .antMatchers("/password_reset").not().fullyAuthenticated()
-                .antMatchers("/password_reset_send").not().fullyAuthenticated()
-                .antMatchers("/password_reset_change_password/**").not().fullyAuthenticated()
-                .antMatchers("/password_reset_cancelled").not().fullyAuthenticated()
+                .antMatchers("/password_reset/**").not().fullyAuthenticated()
+//                .antMatchers("/password_reset_send").not().fullyAuthenticated()
+//                .antMatchers("/password_reset_change_password/**").not().fullyAuthenticated()
+//                .antMatchers("/password_reset_cancelled").not().fullyAuthenticated()
                 // Доступ только для пользователей с ролью Администратор
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 // Доступ только для пользователей с ролью Аналитик
                 .antMatchers("/analyst/**").hasRole("ANALYST")
                 // Доступ для зарегестрированных пользователей (USER, ANALYST, ADMIN) // todo - пересмотреть права
-                .antMatchers("/personal_area").fullyAuthenticated()
+                .antMatchers("/personal_area/**").fullyAuthenticated()
                 .antMatchers("/emotional_assessment").fullyAuthenticated()
                 // Доступ разрешен всем пользователей
                 .antMatchers("/", "/resources/**").permitAll()

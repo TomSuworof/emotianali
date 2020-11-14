@@ -16,7 +16,7 @@ public class PasswordResetController {
         return "password_reset";
     }
 
-    @GetMapping("/password_reset_send")
+    @GetMapping("/password_reset/send")
     public String sendPasswordResetRequest(@RequestParam String username, Model model) {
         if (!passwordResetService.send(username)) {
             model.addAttribute("message", "Такого пользователя не существует");
@@ -27,7 +27,7 @@ public class PasswordResetController {
         return "password_reset";
     }
 
-    @GetMapping("/password_reset_change_password/{id}")
+    @GetMapping("/password_reset/change_password/{id}")
     public String checkValidity(@PathVariable(name = "id") String id, Model model) {
         if (passwordResetService.isRequestValid(id)) {
             model.addAttribute("id", id);
@@ -37,7 +37,7 @@ public class PasswordResetController {
         }
     }
 
-    @PostMapping("password_reset_change_password/set_password")
+    @PostMapping("password_reset/change_password/set_password")
     public String setNewPassword(@RequestParam String passwordNew,
                                  @RequestParam String passwordNewConfirm,
                                  @RequestParam String id,

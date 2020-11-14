@@ -61,7 +61,13 @@ public class PersonalAreaController {
                 return "personal_area";
             }
         }
-        model.addAttribute("message", "Чтобы изменения встпили в силу, выйдите и войдите в аккаунт");
-        return "index";
+        return "redirect:/logout";
+    }
+
+    @GetMapping("/personal_area/delete_account")
+    public String deleteAccount(Model model) {
+        User currentUser = userService.getUserFromContext();
+        userService.deleteUser(currentUser.getId());
+        return "redirect:/logout";
     }
 }
