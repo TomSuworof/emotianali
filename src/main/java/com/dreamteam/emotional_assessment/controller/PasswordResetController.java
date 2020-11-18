@@ -19,10 +19,10 @@ public class PasswordResetController {
     @GetMapping("/password_reset/send")
     public String sendPasswordResetRequest(@RequestParam String username, Model model) {
         if (!passwordResetService.send(username)) {
-            model.addAttribute("message", "Такого пользователя не существует");
+            model.addAttribute("message", "User with this username does not exist");
         } else {
-            model.addAttribute("message", "Письмо отправлено на адрес " + passwordResetService.getEmail());
-            model.addAttribute("note", "Если вы не видите письмо, проверьте папку Спам");
+            model.addAttribute("message", "Message was sent to " + passwordResetService.getEmail());
+            model.addAttribute("note", "If you do not see it, check Spam");
         }
         return "password_reset";
     }
@@ -43,12 +43,12 @@ public class PasswordResetController {
                                  @RequestParam String id,
                                  Model model) {
         if (!passwordNew.equals(passwordNewConfirm)) {
-            model.addAttribute("message", "Пароли не совпадают");
+            model.addAttribute("message", "Passwords do not match");
             model.addAttribute("id", id);
             return "password_reset_new_password";
         }
         if (passwordResetService.setNewPassword(passwordNew, id)) {
-            return "redirect:";
+            return "redirect:/";
         } else {
             return "password_reset_cancelled";
         }

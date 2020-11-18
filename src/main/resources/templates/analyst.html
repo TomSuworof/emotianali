@@ -12,15 +12,19 @@
         <tr>
             <th>ID</th>
             <th>Username</th>
-            <th>Information</th>
+            <th>Tones</th>
             <th>Roles</th>
         </tr>
         <tr th:each="user : ${allUsers}">
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.username}"></td>
-            <td>Тут должна быть какая-то информация</td>
+            <td th:text="${user.getId()}"></td>
+            <td th:text="${user.getUsername()}"></td>
             <td>
-                <p th:each="role: ${user.roles}"></p>
+                <ul th:each="tone : ${user.getTones()}">
+                    <li th:text="${tone.getToneName()}"></li>
+                </ul>
+            </td>
+            <td>
+                <p th:each="role: ${user.getRoles()}"></p>
             </td>
             <td>
                 <form action="/analyst" method="post">
@@ -31,7 +35,7 @@
             </td>
         </tr>
     </table>
-    <a href="/">Главная</a>
+    <a href="/">Main</a>
 </div>
 </body>
 </html>

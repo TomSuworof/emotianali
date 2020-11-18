@@ -26,11 +26,11 @@ public class AdminController {
                              Model model) {
         if (action.equals("delete")) {
             if (userService.deleteUser(userId)) {
-                model.addAttribute("error", "Не удалось удалить пользователя");
+                model.addAttribute("error", "Failed to delete user");
             }
         } else if (action.equals("make_analyst")) {
             if (userService.makeAnalyst(userId)) {
-                model.addAttribute("error", "Не удалось назначить пользователя Аналитиком");
+                model.addAttribute("error", "Failed to set user as Analyst");
             }
         }
         return "admin";

@@ -8,14 +8,14 @@
 <body>
 <div th:object="${currentUser}">
     <form method="POST" th:modelAttribute="userForm">
-        <h2>Личный кабинет</h2>
+        <h2>Personal area</h2>
         <div>First name:
             <br>
             <label>
                 <input type="text" name="firstName" th:value="${currentUser.getFirstName()}" placeholder="First Name" autofocus="autofocus">
             </label>
         </div>
-        <div>Second name:
+        <div>Last name:
             <br>
             <label>
                 <input type="text" name="lastName" th:value="${currentUser.getLastName()}" placeholder="Last Name">
@@ -51,17 +51,17 @@
                     <input type="password" name="passwordNewConfirm" placeholder="Confirm your new password">
                 </label>
             </div>
-            <p>Для подтверждения изменений нужно вести текущий пароль</p>
+            <p>Enter current password for submission</p>
             <p th:text="${error}"></p>
         </div>
-        <button type="submit">Сохранить</button>
+        <button type="submit">Submit</button>
     </form>
     <div>
         <form action="/personal_area/delete_account">
-            <button>Удалить аккаунт</button>
+            <button>Delete account</button>
         </form>
     </div>
-    <a href="/">Главная</a>
+    <a href="/">Main</a>
 </div>
 </body>
 </html>

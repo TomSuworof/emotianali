@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Регистрация</title>
+    <title>Sign up</title>
 </head>
 
 <body>
 <div>
     <form method="POST" th:modelAttribute="userForm">
-        <h2>Регистрация</h2>
+        <h2>Sign up</h2>
         <div>First name:
             <br>
             <label>
@@ -47,9 +47,9 @@
             </label>
             <p th:text="${passwordError}"></p>
         </div>
-        <button type="submit">Зарегистрироваться</button>
+        <button type="submit">Sign up</button>
     </form>
-    <a href="/">Главная</a>
+    <a href="/">Main</a>
 </div>
 </body>
 </html>

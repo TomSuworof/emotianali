@@ -39,17 +39,17 @@ public class MailService {
             email.setSSLOnConnect(true);
             email.setFrom(mailConfig.getUsername());
             email.setCharset("utf-8");
-            email.setSubject("Восстановление пароля");
+            email.setSubject("Password reset");
             email.setHtmlMsg("<html>\n" +
                     "<body>\n" +
                     "\n" +
-                    "<h1>Вы отправили запрос на восстановление пароля.</h1\n" +
+                    "<h1>You sent request for password reset.</h1\n" +
                     "<p>" +
-                    "<a href=\"" + link + "\">Восстановить пароль</a>\n" +
+                    "<a href=\"" + link + "\">Reset password</a>\n" +
                     "\n" +
                     "</p>\n" +
-                    "<p>Если вы отправляли запрос, проигнорируйте письмо.</p>\n" +
-                    "<p>Команда Dreamteam</p>\n" +
+                    "<p>If you did not send the request, ignore this message.</p>\n" +
+                    "<p>Dreamteam</p>\n" +
                     "</body>\n" +
                     "</html>");
             // set the alternative message

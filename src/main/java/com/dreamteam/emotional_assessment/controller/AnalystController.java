@@ -26,7 +26,7 @@ public class AnalystController {
                                  Model model) {
         if (action.equals("get_info")) {
 //            userService.deleteUser(userId);
-            System.out.println("was request for information for user" + userId);
+            System.out.println("was request for information for user" + userId); // todo
         }
         return "analyst";
     }

@@ -9,27 +9,27 @@
     <h1>Welcome to Emotional assessment</h1>
     <div>
         <form action="/emotional_assessment">
-            <button>Начать эмоциональную оценку</button>
+            <button>Start emotional assessment</button>
         </form>
     </div>
     <div th:if="${show_personal_area}">
         <form action="/personal_area">
-            <button>Личный кабинет</button>
+            <button>Personal area</button>
         </form>
     </div>
     <div th:if="${show_logout}">
         <form action="/logout">
-            <button>Выйти</button>
+            <button>Logout</button>
         </form>
     </div>
     <div th:if="${show_admin_page}">
         <form action="/admin">
-            <button>Админка</button>
+            <button>Admin</button>
         </form>
     </div>
     <div th:if="${show_analyst_page}">
         <form action="/analyst">
-            <button>Аналитика</button>
+            <button>Analyst</button>
         </form>
     </div>
 </div>

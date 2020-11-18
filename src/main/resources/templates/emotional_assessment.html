@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Эмоциональная оценка</title>
+    <title>Emotional assessment</title>
 </head>
 <body>
 <div>
-    <h2>Эмоциональная оценка <br> Только для залогинившихся пользователей.</h2>
+    <h2>Emotional assessment <br>Only for registered users.</h2>
     <div></div>
-    <a href="/">Главная</a>
+    <a href="/">Main</a>
     <div>
 <!--        <h1>We are using Telegram API, enter your phone here:</h1>-->
 <!--        <form action="/emotional_assessment_start">-->
@@ -32,6 +32,9 @@
                 <li><h3 th:text="${tone.getScore()}"></h3></li>
             </ul>
         </div>
+    </div>
+    <div>
+        <form action="/emotional_assessment_instagram"></form>
     </div>
 </div>
 </body>

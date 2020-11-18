@@ -40,7 +40,7 @@ public class PersonalAreaController {
         System.out.println(new Gson().toJson(userFromForm));
 
         if (!userService.isCurrentPasswordSameAs(userFromForm.getPassword())) {
-            model.addAttribute("error", "Неверный пароль");
+            model.addAttribute("error", "Wrong password");
             return "personal_area";
         } else {
             userFromForm.setId(currentUser.getId());
@@ -50,14 +50,14 @@ public class PersonalAreaController {
                 passwordWasChanged = false;
             } else {
                 if (!userFromForm.getPasswordNew().equals(userFromForm.getPasswordNewConfirm())) {
-                    model.addAttribute("error", "Пароли не совпадают");
+                    model.addAttribute("error", "Passwords do not match");
                     return "personal_area";
                 } else {
                     passwordWasChanged = true;
                 }
             }
             if (!userService.updateUser(userFromForm, passwordWasChanged)) {
-                model.addAttribute("error", "Что-то пошло не так");
+                model.addAttribute("error", "Something went wrong");
                 return "personal_area";
             }
         }

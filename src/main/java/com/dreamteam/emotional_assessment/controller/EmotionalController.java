@@ -1,7 +1,7 @@
 package com.dreamteam.emotional_assessment.controller;
 
 import com.dreamteam.emotional_assessment.entity.Tone;
-import com.dreamteam.emotional_assessment.service.TelegramService;
+import com.dreamteam.emotional_assessment.service.InstagramService;
 import com.dreamteam.emotional_assessment.service.TranslateService;
 import com.dreamteam.emotional_assessment.service.ToneService;
 import lombok.*;
@@ -14,16 +14,15 @@ import java.util.*;
 @Controller
 @RequiredArgsConstructor
 public class EmotionalController {
-    private final TelegramService telegramService;
+    private final InstagramService instagramService;
     private final ToneService toneService;
     private final TranslateService translateService;
 
-//    @GetMapping("/emotional_assessment_start")
-//    public String returnCode(@RequestParam String phoneNumber) {
-//        // todo here should be some code for telegram api (?)
-//        String authKeyId = telegramService.getAuthKeyId(phoneNumber);
-//        return "emotional_assessment";
-//    }
+    @GetMapping("/emotional_assessment_instagram")
+    public String returnCode() {
+
+        return "emotional_assessment";
+    }
 
     @GetMapping("/emotional_assessment")
     public String returnAssessment(@RequestParam(name = "text", required = false) String text, Model model) {
