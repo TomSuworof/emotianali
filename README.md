@@ -1,2 +1,2 @@
-# emotional_assessment
+# emotianali
 Service of emotional assessment of messages
