@@ -18,13 +18,20 @@ public class EmotionalController {
     private final ToneService toneService;
     private final TranslateService translateService;
 
-    @GetMapping("/emotional_assessment_instagram")
+    @GetMapping("/emotional_assessment/instagram")
     public String returnCode() {
-
-        return "emotional_assessment";
+        return "redirect:" + instagramService.getCode();
     }
 
     @GetMapping("/emotional_assessment")
+    public String returnListOfPosts(@RequestParam(name = "code") String code, Model model) {
+//        String token = instagramService.getToken(code);
+        List<String> posts = instagramService.getPosts("token");
+        posts.forEach(System.out::println);
+        return "emotional_assessment";
+    }
+
+    @GetMapping("/emotional_assessment/start")
     public String returnAssessment(@RequestParam(name = "text", required = false) String text, Model model) {
         if (text != null) {
             String translated = translateService.translate(text);
