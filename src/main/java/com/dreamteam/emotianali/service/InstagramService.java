@@ -15,8 +15,8 @@ public class InstagramService {
     private final String INSTAGRAM_REDIRECT_URL = System.getenv("INSTAGRAM_REDIRECT_URL");
 
     public String getCode() {
-        return "https://api.instagram.com/oauth/authorize" +
-                "?client_id=" + INSTAGRAM_ID +
+        return "https://api.instagram.com/oauth/authorize?" +
+                "client_id=" + INSTAGRAM_ID +
                 "&redirect_uri=" + INSTAGRAM_REDIRECT_URL +
                 "&scope=user_profile,user_media" +
                 "&response_type=code";
