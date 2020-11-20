@@ -25,12 +25,16 @@ public class AdminController {
                              @RequestParam(defaultValue = "") String action,
                              Model model) {
         if (action.equals("delete")) {
-            if (userService.deleteUser(userId)) {
+            if (!userService.deleteUser(userId)) {
                 model.addAttribute("error", "Failed to delete user");
             }
         } else if (action.equals("make_analyst")) {
-            if (userService.makeAnalyst(userId)) {
+            if (!userService.changeRole(userId, "analyst")) {
                 model.addAttribute("error", "Failed to set user as Analyst");
+            }
+        } else if (action.equals("make_user")) {
+            if (!userService.changeRole(userId, "user")) {
+                model.addAttribute("error", "Failed to set user as User");
             }
         }
         return "admin";

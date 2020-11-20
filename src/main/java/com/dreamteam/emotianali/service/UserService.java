@@ -97,13 +97,17 @@ public class UserService implements UserDetailsService {
         return false;
     }
 
-    public boolean makeAnalyst(Long userId) {
+    public boolean changeRole(Long userId, String role) {
         User userFromDB = userRepository.findById(userId).orElseThrow(RuntimeException::new);
 
         if (!deleteUser(userId)) {
             return false;
         }
-        userFromDB.setRoles(Collections.singleton(new Role(2L, "ROLE_ANALYST")));
+        if (role.equals("analyst")) {
+            userFromDB.setRoles(Collections.singleton(new Role(2L, "ROLE_ANALYST")));
+        } else if (role.equals("user")) {
+            userFromDB.setRoles(Collections.singleton(new Role(3L, "ROLE_USER")));
+        }
         userRepository.save(userFromDB);
         return true;
     }

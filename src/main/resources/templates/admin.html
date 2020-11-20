@@ -35,6 +35,11 @@
                         <input type="hidden" name="action" value="make_analyst"/>
                         <button type="submit">Make analyst</button>
                     </form>
+                    <form action="/admin" method="post">
+                        <input type="hidden" name="userId" th:value="${user.id}"/>
+                        <input type="hidden" name="action" value="make_user"/>
+                        <button type="submit">Make user</button>
+                    </form>
                 </td>
             </tr>
     </table>
