@@ -37,6 +37,7 @@ public class AdminController {
                 model.addAttribute("error", "Failed to set user as User");
             }
         }
+        model.addAttribute("allUsers", userService.allUsers());
         return "admin";
     }
 
