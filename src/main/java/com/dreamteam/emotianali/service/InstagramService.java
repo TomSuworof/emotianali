@@ -22,7 +22,7 @@ public class InstagramService {
         return "https://api.instagram.com/oauth/authorize?" +
                 "client_id=" + INSTAGRAM_ID +
                 "&redirect_uri=" + INSTAGRAM_REDIRECT_URI +
-                "&scope=user_profile,user_media" +
+                "&scope=user_profile+user_media+basic" +
                 "&response_type=code";
     }
 
