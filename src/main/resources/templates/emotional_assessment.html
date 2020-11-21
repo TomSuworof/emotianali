@@ -34,10 +34,13 @@
     <div>
         <ul th:each="post : ${instagramPosts}">
             <li>
-                <div>
-                    <h4 th:text="${post.getId()}"></h4>
-                    <p th:text="${post.getCaption()}"></p>
-                </div>
+                <form action="/emotional_assessment/start">
+                    <input name="text" type="hidden" th:value="${post.getCaption()}">
+                    <div>
+                        <p th:text="${post.getCaption()}"></p>
+                    </div>
+                    <button type="submit">Assess</button>
+                </form>
             </li>
         </ul>
     </div>
