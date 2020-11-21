@@ -42,10 +42,10 @@ public class InstagramService {
         vars.put("redirect_uri", INSTAGRAM_REDIRECT_URI);
         vars.put("code", code);
 
-        HttpEntity<Map<String, String>> entity = new HttpEntity<>(vars, headers);
-        ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
+//        HttpEntity<Map<String, String>> entity = new HttpEntity<>(vars, headers);
+//        ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
 
-        String answer = response.getBody();
+        final String answer = restTemplate.postForObject(url, vars, String.class);
 //        JsonObject jsonObject = new Gson().fromJson(answer, JsonObject.class);
 //
 //        if (!jsonObject.get("error").getAsString().isEmpty()) {
