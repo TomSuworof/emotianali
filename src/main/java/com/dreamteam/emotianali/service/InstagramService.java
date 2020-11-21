@@ -37,11 +37,14 @@ public class InstagramService {
                 .get("data").getAsJsonArray();
         List<InstagramPost> instagramPosts = new ArrayList<>();
         for (JsonElement jsonPost : jsonData) {
-            InstagramPost instagramPost = new InstagramPost(
-                    jsonPost.getAsJsonObject().get("id").getAsLong(),
-                    jsonPost.getAsJsonObject().get("caption").getAsString()
-            );
-            instagramPosts.add(instagramPost);
+            try {
+                InstagramPost instagramPost = new InstagramPost(
+                        jsonPost.getAsJsonObject().get("id").getAsLong(),
+                        jsonPost.getAsJsonObject().get("caption").getAsString()
+                );
+                instagramPosts.add(instagramPost);
+            } catch (NullPointerException ignored) {
+            }
         }
         return instagramPosts;
     }
