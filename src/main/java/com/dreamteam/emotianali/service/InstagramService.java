@@ -30,7 +30,7 @@ public class InstagramService {
                 "grant_type=authorization_code" +
                 "redirect_uri=" + INSTAGRAM_REDIRECT_URI +
                 "code=" + code;
-        final String answer = restTemplate.getForObject(url, String.class);
+        final String answer = restTemplate.postForObject(url, null, String.class);
 //        JsonObject jsonObject = new Gson().fromJson(answer, JsonObject.class);
 //
 //        if (!jsonObject.get("error").getAsString().isEmpty()) {
