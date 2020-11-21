@@ -31,8 +31,7 @@ public class InstagramService {
         JsonObject jsonObject = new Gson().fromJson(answer, JsonObject.class);
         String accessToken = jsonObject.get("access_token").getAsString();
         String userId = jsonObject.get("user_id").getAsString();
-        System.out.println(accessToken);
-        System.out.println(userId);
+        System.out.println(getUserData(accessToken));
         return new ArrayList<>();
     }
 
@@ -48,6 +47,24 @@ public class InstagramService {
                             .add("grant_type", "authorization_code")
                             .add("redirect_uri", INSTAGRAM_REDIRECT_URI)
                             .add("code", code)
+                            .build())
+                    .execute().returnContent().asString();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
+        return answer;
+    }
+
+    private String getUserData(String accessToken) {
+        String url = "https://graph.instagram.com/me/media";
+        String answer = "";
+        try {
+            answer = Request.Post(url)
+                    .addHeader("X-Custom-header", "Emotianali")
+                    .bodyForm(Form.form()
+                            .add("fields", "id,caption")
+                            .add("access_token", accessToken)
                             .build())
                     .execute().returnContent().asString();
         } catch (IOException ioe) {
