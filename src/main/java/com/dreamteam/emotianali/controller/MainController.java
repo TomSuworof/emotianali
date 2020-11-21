@@ -32,6 +32,11 @@ public class MainController {
     public String returnLogin() {
         return "login";
     }
+
+    @GetMapping("/terms_of_use")
+    public String returnTermsOfUse() {
+        return "terms_of_use";
+    }
 }
 
 /* todo

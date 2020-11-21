@@ -26,7 +26,17 @@ public class InstagramService {
                 "&response_type=code";
     }
 
-    public String getToken(String code) {
+    public List<String> getPosts(String code) {
+        String answer = getTokenAndUserId(code);
+        JsonObject jsonObject = new Gson().fromJson(answer, JsonObject.class);
+        String accessToken = jsonObject.get("access_token").getAsString();
+        String userId = jsonObject.get("user_id").getAsString();
+        System.out.println(accessToken);
+        System.out.println(userId);
+        return new ArrayList<>();
+    }
+
+    private String getTokenAndUserId(String code) {
         String url = "https://api.instagram.com/oauth/access_token";
         String answer = "";
         try {
@@ -44,16 +54,6 @@ public class InstagramService {
             ioe.printStackTrace();
         }
 
-        JsonObject jsonObject = new Gson().fromJson(answer, JsonObject.class);
-
-        if (!jsonObject.get("error").getAsString().isEmpty()) {
-            throw new RuntimeException("Invalid token");
-        }
-        return jsonObject.get("access_token").getAsString();
-    }
-
-    public List<String> getPosts(String token) {
-        System.out.println(token);
-        return new ArrayList<>();
+        return answer;
     }
 }
