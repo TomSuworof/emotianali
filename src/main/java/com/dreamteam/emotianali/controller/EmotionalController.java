@@ -25,8 +25,10 @@ public class EmotionalController {
 
     @GetMapping("/emotional_assessment")
     public String returnListOfPosts(@RequestParam(name = "code") String code, Model model) {
+        System.out.println(code);
         String token = instagramService.getToken(code);
-        List<String> posts = instagramService.getPosts("token");
+        System.out.println(token);
+        List<String> posts = instagramService.getPosts(token);
         posts.forEach(System.out::println);
         return "emotional_assessment";
     }

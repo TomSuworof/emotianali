@@ -15,7 +15,6 @@ public class InstagramService {
     private final String INSTAGRAM_REDIRECT_URI = System.getenv("INSTAGRAM_REDIRECT_URI");
 
     public String getCode() {
-        System.out.println(INSTAGRAM_REDIRECT_URI);
         return "https://api.instagram.com/oauth/authorize?" +
                 "client_id=" + INSTAGRAM_ID +
                 "&redirect_uri=" + INSTAGRAM_REDIRECT_URI +
@@ -41,7 +40,6 @@ public class InstagramService {
     }
 
     public List<String> getPosts(String token) {
-        System.out.println(token);
         return new ArrayList<>();
     }
 }
