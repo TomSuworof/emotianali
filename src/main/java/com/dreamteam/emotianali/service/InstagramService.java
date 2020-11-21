@@ -6,6 +6,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
 import java.util.*;
 
 @Service
@@ -43,7 +44,7 @@ public class InstagramService {
 //        HttpEntity<Map<String, String>> entity = new HttpEntity<>(vars, headers);
 //        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
 
-        final String answer = restTemplate.getForObject(url, String.class, vars);
+        final String answer = restTemplate.postForObject(url, null, String.class, vars);
 
         System.out.println(answer);
 
