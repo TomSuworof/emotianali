@@ -12,13 +12,13 @@ import java.util.List;
 public class InstagramService {
     private final String INSTAGRAM_ID = System.getenv("INSTAGRAM_ID");
     private final String INSTAGRAM_CLIENT_SECRET = System.getenv("INSTAGRAM_CLIENT_SECRET");
-    private final String INSTAGRAM_REDIRECT_URL = System.getenv("INSTAGRAM_REDIRECT_URL");
+    private final String INSTAGRAM_REDIRECT_URI = System.getenv("INSTAGRAM_REDIRECT_URI");
 
     public String getCode() {
-        System.out.println(INSTAGRAM_REDIRECT_URL);
+        System.out.println(INSTAGRAM_REDIRECT_URI);
         return "https://api.instagram.com/oauth/authorize?" +
                 "client_id=" + INSTAGRAM_ID +
-                "&redirect_uri=" + INSTAGRAM_REDIRECT_URL +
+                "&redirect_uri=" + INSTAGRAM_REDIRECT_URI +
                 "&scope=user_profile,user_media" +
                 "&response_type=code";
     }
@@ -29,7 +29,7 @@ public class InstagramService {
                 "client_id=" + INSTAGRAM_ID +
                 "client_secret=" + INSTAGRAM_CLIENT_SECRET +
                 "grant_type=authorization_code" +
-                "redirect_uri=" + INSTAGRAM_REDIRECT_URL +
+                "redirect_uri=" + INSTAGRAM_REDIRECT_URI +
                 "code=" + code;
         final String answer = restTemplate.getForObject(url, String.class);
         JsonObject jsonObject = new Gson().fromJson(answer, JsonObject.class);
