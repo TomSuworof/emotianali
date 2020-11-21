@@ -15,6 +15,7 @@ public class InstagramService {
     private final String INSTAGRAM_REDIRECT_URL = System.getenv("INSTAGRAM_REDIRECT_URL");
 
     public String getCode() {
+        System.out.println(INSTAGRAM_REDIRECT_URL);
         return "https://api.instagram.com/oauth/authorize?" +
                 "client_id=" + INSTAGRAM_ID +
                 "&redirect_uri=" + INSTAGRAM_REDIRECT_URL +
@@ -24,7 +25,6 @@ public class InstagramService {
 
     public String getToken(String code) {
         final RestTemplate restTemplate = new RestTemplate();
-        System.out.println(INSTAGRAM_REDIRECT_URL);
         String url = "https://api.instagram.com/oauth/access_token?" +
                 "client_id=" + INSTAGRAM_ID +
                 "client_secret=" + INSTAGRAM_CLIENT_SECRET +
