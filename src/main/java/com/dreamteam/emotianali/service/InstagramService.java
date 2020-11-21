@@ -40,6 +40,7 @@ public class InstagramService {
     }
 
     public List<String> getPosts(String token) {
+        System.out.println(token);
         return new ArrayList<>();
     }
 }
