@@ -57,12 +57,7 @@ public class InstagramService {
         String url = "https://graph.instagram.com/me/media";
         String answer = "";
         try {
-            answer = Request.Get(url)
-                    .addHeader("X-Custom-header", "Emotianali")
-                    .bodyForm(Form.form()
-                            .add("fields", "id,caption")
-                            .add("access_token", accessToken)
-                            .build())
+            answer = Request.Get(url + "?fields=id,caption&access_token=" + accessToken)
                     .execute().returnContent().asString();
         } catch (IOException ioe) {
             ioe.printStackTrace();
