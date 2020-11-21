@@ -1,6 +1,9 @@
 package com.dreamteam.emotianali.service;
 
+import com.dreamteam.emotianali.entity.InstagramPost;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
@@ -23,13 +26,24 @@ public class InstagramService {
                 "&response_type=code";
     }
 
-    public List<String> getPosts(String code) {
+    public List<InstagramPost> getPosts(String code) {
         String answer = getTokenAndUserId(code);
         JsonObject jsonObject = new Gson().fromJson(answer, JsonObject.class);
         String accessToken = jsonObject.get("access_token").getAsString();
         String userId = jsonObject.get("user_id").getAsString();
-        System.out.println(getUserData(accessToken));
-        return new ArrayList<>();
+        String userData = getUserData(accessToken);
+        JsonArray jsonData = new Gson()
+                .fromJson(userData, JsonObject.class)
+                .get("data").getAsJsonArray();
+        List<InstagramPost> instagramPosts = new ArrayList<>();
+        for (JsonElement jsonPost : jsonData) {
+            InstagramPost instagramPost = new InstagramPost(
+                    jsonPost.getAsJsonObject().get("id").getAsLong(),
+                    jsonPost.getAsJsonObject().get("caption").getAsString()
+            );
+            instagramPosts.add(instagramPost);
+        }
+        return instagramPosts;
     }
 
     private String getTokenAndUserId(String code) {
@@ -57,7 +71,7 @@ public class InstagramService {
         String url = "https://graph.instagram.com/me/media";
         String answer = "";
         try {
-            answer = Request.Get(url + "?fields=id,caption&access_token=" + accessToken)
+            answer = Request.Get(url + "?fields=id,caption&limit=100&access_token=" + accessToken)
                     .execute().returnContent().asString();
         } catch (IOException ioe) {
             ioe.printStackTrace();

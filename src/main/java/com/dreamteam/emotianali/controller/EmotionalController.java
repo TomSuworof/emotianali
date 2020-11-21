@@ -1,5 +1,6 @@
 package com.dreamteam.emotianali.controller;
 
+import com.dreamteam.emotianali.entity.InstagramPost;
 import com.dreamteam.emotianali.entity.Tone;
 import com.dreamteam.emotianali.service.InstagramService;
 import com.dreamteam.emotianali.service.TranslateService;
@@ -25,7 +26,7 @@ public class EmotionalController {
 
     @GetMapping("/emotional_assessment")
     public String returnListOfPosts(@RequestParam(name = "code") String code, Model model) {
-        List<String> posts = instagramService.getPosts(code);
+        List<InstagramPost> posts = instagramService.getPosts(code);
         posts.forEach(System.out::println);
         return "emotional_assessment";
     }
