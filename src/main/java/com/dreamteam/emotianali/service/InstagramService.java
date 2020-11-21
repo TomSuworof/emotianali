@@ -2,10 +2,7 @@ package com.dreamteam.emotianali.service;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,12 +24,12 @@ public class InstagramService {
 
     public String getToken(String code) {
         final RestTemplate restTemplate = new RestTemplate();
-        String url = "https://api.instagram.com/oauth/access_token?" +
-                "client_id=" + INSTAGRAM_ID +
-                "client_secret=" + INSTAGRAM_CLIENT_SECRET +
-                "grant_type=authorization_code" +
-                "redirect_uri=" + INSTAGRAM_REDIRECT_URI +
-                "code=" + code;
+        String url = "https://api.instagram.com/oauth/access_token?";
+//                "client_id=" + INSTAGRAM_ID +
+//                "client_secret=" + INSTAGRAM_CLIENT_SECRET +
+//                "grant_type=authorization_code" +
+//                "redirect_uri=" + INSTAGRAM_REDIRECT_URI +
+//                "code=" + code;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
@@ -43,10 +40,10 @@ public class InstagramService {
         vars.put("code", code);
 
         HttpEntity<Map<String, String>> entity = new HttpEntity<>(vars, headers);
-        System.out.println(entity);
-        ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
 
         String answer = response.getBody();
+        System.out.println(answer);
 
 //        final String answer = restTemplate.postForObject(url, vars, String.class);
 //        JsonObject jsonObject = new Gson().fromJson(answer, JsonObject.class);
