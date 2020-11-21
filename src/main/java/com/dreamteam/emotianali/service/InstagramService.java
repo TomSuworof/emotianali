@@ -31,12 +31,13 @@ public class InstagramService {
                 "redirect_uri=" + INSTAGRAM_REDIRECT_URI +
                 "code=" + code;
         final String answer = restTemplate.getForObject(url, String.class);
-        JsonObject jsonObject = new Gson().fromJson(answer, JsonObject.class);
-
-        if (!jsonObject.get("error").getAsString().isEmpty()) {
-            throw new RuntimeException("Invalid token");
-        }
-        return jsonObject.get("access_token").getAsString();
+//        JsonObject jsonObject = new Gson().fromJson(answer, JsonObject.class);
+//
+//        if (!jsonObject.get("error").getAsString().isEmpty()) {
+//            throw new RuntimeException("Invalid token");
+//        }
+//        return jsonObject.get("access_token").getAsString();
+        return answer;
     }
 
     public List<String> getPosts(String token) {
