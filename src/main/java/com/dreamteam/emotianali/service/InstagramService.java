@@ -27,12 +27,12 @@ public class InstagramService {
 
     public String getToken(String code) {
         final RestTemplate restTemplate = new RestTemplate();
-        String url = "https://api.instagram.com/oauth/access_token?";
-//                "client_id=" + INSTAGRAM_ID +
-//                "client_secret=" + INSTAGRAM_CLIENT_SECRET +
-//                "grant_type=authorization_code" +
-//                "redirect_uri=" + INSTAGRAM_REDIRECT_URI +
-//                "code=" + code;
+        String url = "https://api.instagram.com/oauth/access_token?" +
+                "client_id=" + INSTAGRAM_ID +
+                "client_secret=" + INSTAGRAM_CLIENT_SECRET +
+                "grant_type=authorization_code" +
+                "redirect_uri=" + INSTAGRAM_REDIRECT_URI +
+                "code=" + code;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
