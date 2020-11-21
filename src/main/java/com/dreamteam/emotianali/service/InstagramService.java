@@ -34,10 +34,11 @@ public class InstagramService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         Map<String, String> vars = new HashMap<>();
-        vars.put("client_id", INSTAGRAM_ID);
-        vars.put("client_secret", INSTAGRAM_CLIENT_SECRET);
-        vars.put("redirect_uri", INSTAGRAM_REDIRECT_URI);
         vars.put("code", code);
+        vars.put("redirect_uri", INSTAGRAM_REDIRECT_URI);
+        vars.put("grant_type", "authorization_code");
+        vars.put("client_secret", INSTAGRAM_CLIENT_SECRET);
+        vars.put("client_id", INSTAGRAM_ID);
 
         HttpEntity<Map<String, String>> entity = new HttpEntity<>(vars, headers);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
