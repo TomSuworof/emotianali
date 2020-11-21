@@ -10,13 +10,6 @@
     <div></div>
     <a href="/">Main</a>
     <div>
-<!--        <h1>We are using Telegram API, enter your phone here:</h1>-->
-<!--        <form action="/emotional_assessment_start">-->
-<!--            <label>-->
-<!--                <input name="phoneNumber" type="number" placeholder="Phone number">-->
-<!--            </label>-->
-<!--            <input type="submit">-->
-<!--        </form>-->
         <form action="/emotional_assessment/start">
             <label>
                 <input name="text" type="text" placeholder="type some text">
@@ -37,6 +30,16 @@
         <form action="/emotional_assessment/instagram">
             <button>Get instagram posts</button>
         </form>
+    </div>
+    <div>
+        <ul th:each="post : ${instagramPosts}">
+            <li>
+                <div>
+                    <h4 th:text="${post.getId()}"></h4>
+                    <p th:text="${post.getCaption()}"></p>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>
 </body>
