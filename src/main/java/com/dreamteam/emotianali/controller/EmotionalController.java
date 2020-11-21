@@ -23,7 +23,7 @@ public class EmotionalController {
         return "redirect:" + instagramService.getCode();
     }
 
-    @GetMapping("/emotional_assessment")
+    @RequestMapping(value = "/emotional_assessment", method = RequestMethod.POST)
     public String returnListOfPosts(@RequestParam(name = "code") String code, Model model) {
         String token = instagramService.getToken(code);
         System.out.println(token);
