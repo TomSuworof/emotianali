@@ -4,12 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
-import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.net.URI;
 import java.util.*;
 
 @Service
@@ -60,7 +57,7 @@ public class InstagramService {
         String url = "https://graph.instagram.com/me/media";
         String answer = "";
         try {
-            answer = Request.Post(url)
+            answer = Request.Get(url)
                     .addHeader("X-Custom-header", "Emotianali")
                     .bodyForm(Form.form()
                             .add("fields", "id,caption")
