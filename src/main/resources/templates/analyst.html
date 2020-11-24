@@ -8,24 +8,21 @@
 
 <body>
 <div>
-    <table>
+    <table style="border: 1px">
         <tr>
             <th>ID</th>
             <th>Username</th>
             <th>Tones</th>
-            <th>Roles</th>
         </tr>
         <tr th:each="user : ${allUsers}">
             <td th:text="${user.getId()}"></td>
             <td th:text="${user.getUsername()}"></td>
             <td>
                 <ul th:each="tone : ${user.getTones()}">
-                    <li th:text="${tone.getToneName()}"></li>
+                    <li th:text="${tone.getToneName()} + ' ' + ${tone.getScore()}"></li>
                 </ul>
             </td>
-            <td>
-                <p th:each="role: ${user.getRoles()}"></p>
-            </td>
+
             <td>
                 <form action="/analyst" method="post">
                     <input type="hidden" name="userId" th:value="${user.id}"/>
