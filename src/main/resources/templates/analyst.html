@@ -32,7 +32,7 @@
 
             <td>
                 <form action="/analyst" method="post">
-                    <input type="hidden" name="userId" th:value="${user.id}"/>
+                    <input type="hidden" name="username" th:value="${user.getUsername()}"/>
                     <input type="hidden" name="action" value="get_info"/>
                     <button type="submit">Get info</button>
                 </form>
@@ -40,6 +40,12 @@
         </tr>
     </table>
     <a href="/">Main</a>
+    <div>
+        <h2 th:text="${requiredUsername}"></h2>
+        <ul th:each="tone : ${tones}">
+            <li th:text="${tone.getToneName()} + ' ' + ${tone.getScore()}"></li>
+        </ul>
+    </div>
 </div>
 </body>
 </html>
