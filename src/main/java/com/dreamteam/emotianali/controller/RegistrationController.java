@@ -24,8 +24,11 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-
+    public String addUser(@ModelAttribute("userForm") User userForm, String agreement, BindingResult bindingResult, Model model) {
+        if (agreement == null) {
+            model.addAttribute("agreementError", "In order to use service you should agree with terms of use");
+            return "registration";
+        }
         if (bindingResult.hasErrors()) {
             return "registration";
         }
