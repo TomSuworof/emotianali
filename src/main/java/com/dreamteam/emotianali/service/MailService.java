@@ -59,6 +59,7 @@ public class MailService {
     }
 
     private boolean sendRoleChanged(HtmlEmail email, String role) {
+        role = role.equals("blocked") ? role : "an " + role;
         try {
             email.setSubject("Your role was changed");
             email.setHtmlMsg("<html>\n" +
