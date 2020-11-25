@@ -30,6 +30,7 @@ public class PasswordResetController {
     @GetMapping("/password_reset/change_password/{id}")
     public String checkValidity(@PathVariable(name = "id") String id, Model model) {
         if (passwordResetService.isRequestValid(id)) {
+            model.addAttribute("secretQuestion", passwordResetService.getSecretQuestion(id));
             model.addAttribute("id", id);
             return "password_reset_new_password";
         } else {
@@ -41,7 +42,13 @@ public class PasswordResetController {
     public String setNewPassword(@RequestParam String passwordNew,
                                  @RequestParam String passwordNewConfirm,
                                  @RequestParam String id,
+                                 @RequestParam String secretAnswer,
                                  Model model) {
+        if (!secretAnswer.equals(passwordResetService.getSecretAnswer(id))) {
+            model.addAttribute("message", "Wrong answer");
+            model.addAttribute("id", id);
+            return "password_reset_new_password";
+        }
         if (!passwordNew.equals(passwordNewConfirm)) {
             model.addAttribute("message", "Passwords do not match");
             model.addAttribute("id", id);

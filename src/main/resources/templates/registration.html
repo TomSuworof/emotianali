@@ -9,24 +9,36 @@
 <div>
     <form method="POST" th:modelAttribute="userForm">
         <h2>Sign up</h2>
+        <div>Profile image:
+            <br>
+            <label>
+                <input type="text" name="imageLink" placeholder="Link for profile image" autofocus required>
+            </label>
+        </div>
         <div>First name:
             <br>
             <label>
-                <input type="text" name="firstName" placeholder="First Name" autofocus="autofocus" required>
+                <input type="text" name="firstName" placeholder="First Name" required>
             </label>
         </div>
-        <div>Second name:
+        <div>Last name:
             <br>
             <label>
                 <input type="text" name="lastName" placeholder="Last Name" required>
             </label>
         </div>
-<!--        <div>-->
-<!--            Group:-->
-<!--            <select name="group">-->
-<!--                -->
-<!--            </select> todo-->
-<!--        </div>-->
+        <div>Birthday
+            <br>
+            <label>
+                <input type="date" name="birthday" placeholder="Birthday">
+            </label>
+        </div>
+        <div>Group:
+            <br>
+            <label>
+                <input type="text" name="userGroup" placeholder="Group">
+            </label>
+        </div>
         <div>Email:
             <br>
             <label>
@@ -52,6 +64,18 @@
                 <input type="password" name="passwordConfirm" placeholder="Confirm your password" required>
             </label>
             <p th:text="${passwordError}"></p>
+        </div>
+        <div>Secret question
+            <br>
+            <label>
+                <input type="text" name="secretQuestion" placeholder="Enter your secret question" required>
+            </label>
+        </div>
+        <div>Secret answer
+            <br>
+            <label>
+                <input type="text" name="secretAnswer" placeholder="Enter your answer for secret question" required>
+            </label>
         </div>
         <div>
             <label>

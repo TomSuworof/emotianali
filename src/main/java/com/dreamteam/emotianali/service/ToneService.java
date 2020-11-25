@@ -1,5 +1,6 @@
 package com.dreamteam.emotianali.service;
 
+import com.dreamteam.emotianali.entity.Record;
 import com.dreamteam.emotianali.entity.Tone;
 import com.dreamteam.emotianali.entity.User;
 import com.google.gson.*;
@@ -24,7 +25,7 @@ public class ToneService {
         JsonArray tonesJson = parseJson(assessment);
         List<Tone> tones = collectTones(tonesJson);
 
-        if (addUserAssessments(tones)) {
+        if (addUserAssessments(text, tones)) {
             return tones;
         } else {
             throw new RuntimeException();
@@ -62,11 +63,11 @@ public class ToneService {
         return tones;
     }
 
-    private boolean addUserAssessments(List<Tone> tones) {
+    private boolean addUserAssessments(String text, List<Tone> tones) {
         User currentUser = userService.getUserFromContext();
-        Set<Tone> userTones = currentUser.getTones();
-        userTones.addAll(tones);
-        currentUser.setTones(userTones);
+        Set<Record> userRecords = currentUser.getRecords();
+        userRecords.add(new Record(text, Set.copyOf(tones)));
+        currentUser.setRecords(userRecords);
         return userService.updateUser(currentUser, false);
     }
 }

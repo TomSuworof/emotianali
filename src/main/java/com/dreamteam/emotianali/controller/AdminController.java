@@ -25,7 +25,7 @@ public class AdminController {
                              @RequestParam(defaultValue = "") String action,
                              Model model) {
         if (action.equals("delete")) {
-            if (!userService.deleteUser(userId)) {
+            if (!userService.changeRole(userId, "blocked")) {
                 model.addAttribute("error", "Failed to delete user");
             }
         } else if (action.equals("make_analyst")) {

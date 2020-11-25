@@ -18,6 +18,7 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
+    private final MailService mailService;
 
     @PersistenceContext
     private EntityManager em;
@@ -66,10 +67,13 @@ public class UserService implements UserDetailsService {
             return false;
         }
 
+        userFromDB.setImageLink(userFromForm.getImageLink());
         userFromDB.setFirstName(userFromForm.getFirstName());
         userFromDB.setLastName(userFromForm.getLastName());
+        userFromDB.setBirthday(userFromForm.getBirthday());
+        userFromDB.setUserGroup(userFromForm.getUserGroup());
         userFromDB.setEmail(userFromForm.getEmail());
-        userFromDB.setTones(userFromForm.getTones());
+        userFromDB.setRecords(userFromForm.getRecords());
 
         if (passwordWasChanged) {
             return updateWithPassword(userFromDB, userFromForm.getPasswordNew());
@@ -107,7 +111,10 @@ public class UserService implements UserDetailsService {
             userFromDB.setRoles(Collections.singleton(new Role(2L, "ROLE_ANALYST")));
         } else if (role.equals("user")) {
             userFromDB.setRoles(Collections.singleton(new Role(3L, "ROLE_USER")));
+        } else if (role.equals("blocked")) {
+            userFromDB.setRoles(Collections.singleton(new Role(0L, "ROLE_BLOCKED")));
         }
+        mailService.send(userFromDB.getEmail(), false, role);
         userRepository.save(userFromDB);
         return true;
     }

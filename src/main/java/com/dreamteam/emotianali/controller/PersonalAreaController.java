@@ -37,8 +37,6 @@ public class PersonalAreaController {
         User currentUser = userService.getUserFromContext();
         model.addAttribute("currentUser", currentUser);
 
-        System.out.println(new Gson().toJson(userFromForm));
-
         if (!userService.isCurrentPasswordSameAs(userFromForm.getPassword())) {
             model.addAttribute("error", "Wrong password");
             return "personal_area";
@@ -67,7 +65,7 @@ public class PersonalAreaController {
     @GetMapping("/personal_area/delete_account")
     public String deleteAccount(Model model) {
         User currentUser = userService.getUserFromContext();
-        userService.deleteUser(currentUser.getId());
+        userService.changeRole(currentUser.getId(), "blocked");
         return "redirect:/logout";
     }
 }
