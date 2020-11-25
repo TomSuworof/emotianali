@@ -12,16 +12,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.*;
 import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
     private final MailService mailService;
-
-    @PersistenceContext
-    private EntityManager em;
 
     private final UserRepository userRepository;
 
@@ -125,12 +121,8 @@ public class UserService implements UserDetailsService {
         return passwordEncoder.matches(passwordAnother, currentUserPassword);
     }
 
-    public List<User> usergtList(Long idMin) {
-        return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
-                .setParameter("paramId", idMin).getResultList();
-    }
 
-    public List<User> allUsers() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 }

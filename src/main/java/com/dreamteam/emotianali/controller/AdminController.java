@@ -5,7 +5,6 @@ import lombok.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,7 +15,7 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String userList(Model model) {
-        model.addAttribute("allUsers", userService.allUsers());
+        model.addAttribute("allUsers", userService.getAllUsers());
         return "admin";
     }
 
@@ -37,13 +36,8 @@ public class AdminController {
                 model.addAttribute("error", "Failed to set user as User");
             }
         }
-        model.addAttribute("allUsers", userService.allUsers());
+        model.addAttribute("allUsers", userService.getAllUsers());
         return "admin";
     }
 
-    @GetMapping("/admin/get/{userId}")
-    public String  gtUser(@PathVariable("userId") Long userId, Model model) {
-        model.addAttribute("allUsers", userService.usergtList(userId));
-        return "admin";
-    }
 }
