@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 
 @Controller
@@ -46,9 +48,13 @@ public class AnalystController {
         List<Tone> allTones = analystService.getAllInfo();
 
         if (format.equals("bar")) {
-            model.addAttribute("message", "Bar chart is coming");
+            byte[] barChartImage = analystService.returnBarChartImage(allTones);
+            String encoded = new String(Base64.getEncoder().encode(barChartImage), StandardCharsets.UTF_8);
+            model.addAttribute("image", encoded);
         } else if (format.equals("pie")) {
-            model.addAttribute("message", "Pie chart is coming");
+            byte[] pieChartImage = analystService.returnPieChartImage(allTones);
+            String encoded = new String(Base64.getEncoder().encode(pieChartImage), StandardCharsets.UTF_8);
+            model.addAttribute("image", encoded);
         }
         model.addAttribute("allTones", allTones);
         model.addAttribute("header", "Statistics for all users");
