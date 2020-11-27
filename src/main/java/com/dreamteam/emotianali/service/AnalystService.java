@@ -60,45 +60,58 @@ public class AnalystService {
         return Arrays.asList(anger, fear, joy, sadness, analytical, confident);
     }
 
-    public byte[] returnBarChartImage(List<Tone> tones) {
-        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        for (Tone tone : tones) {
-            dataset.addValue(tone.getScore(), tone.getToneName(), "Emotions of users");
-        }
-
-        JFreeChart barChart = ChartFactory.createBarChart(
-                "Emotions of users",
-                "Emotions",
-                "Score",
-                dataset,
-                PlotOrientation.VERTICAL,
-                true, true, false
-        );
+    public byte[] getBarChartImage(List<Tone> tones) {
         try {
             File barChartImage = File.createTempFile( "barChart", ".jpeg");
-            ChartUtils.saveChartAsJPEG(barChartImage, barChart, 480, 640);
+            ChartUtils.saveChartAsJPEG(barChartImage, getBarChart(tones), 480, 640);
             return Files.readAllBytes(barChartImage.toPath());
         } catch (IOException ignored) {
             return null;
         }
     }
 
-    public byte[] returnPieChartImage(List<Tone> tones) {
-        final DefaultPieDataset dataset = new DefaultPieDataset();
-        for (Tone tone : tones) {
-            dataset.setValue( tone.getToneName(), tone.getScore());
-        }
-        JFreeChart pieChart = ChartFactory.createPieChart(
+    private JFreeChart getBarChart(List<Tone> tones) {
+        return ChartFactory.createBarChart(
                 "Emotions of users",
-                dataset,
+                "Emotions",
+                "Score",
+                getBarDataset(tones),
+                PlotOrientation.VERTICAL,
                 true, true, false
         );
+    }
+
+    private DefaultCategoryDataset getBarDataset(List<Tone> tones) {
+        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (Tone tone : tones) {
+            dataset.addValue(tone.getScore(), tone.getToneName(), "Emotions of users");
+        }
+        return dataset;
+    }
+
+    public byte[] returnPieChartImage(List<Tone> tones) {
         try {
             File pieChartImage = File.createTempFile("pieChart", ".jpeg");
-            ChartUtils.saveChartAsJPEG(pieChartImage, pieChart, 480, 640);
+            ChartUtils.saveChartAsJPEG(pieChartImage, getPieChart(tones), 480, 640);
             return Files.readAllBytes(pieChartImage.toPath());
         } catch (IOException ignored) {
             return null;
         }
+    }
+
+    private JFreeChart getPieChart(List<Tone> tones) {
+        return ChartFactory.createPieChart(
+                "Emotions of users",
+                getPieDataset(tones),
+                true, true, false
+        );
+    }
+
+    private DefaultPieDataset getPieDataset(List<Tone> tones) {
+        final DefaultPieDataset dataset = new DefaultPieDataset();
+        for (Tone tone : tones) {
+            dataset.setValue( tone.getToneName(), tone.getScore());
+        }
+        return dataset;
     }
 }

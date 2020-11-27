@@ -48,7 +48,7 @@ public class AnalystController {
         List<Tone> allTones = analystService.getAllInfo();
 
         if (format.equals("bar")) {
-            byte[] barChartImage = analystService.returnBarChartImage(allTones);
+            byte[] barChartImage = analystService.getBarChartImage(allTones);
             String encoded = new String(Base64.getEncoder().encode(barChartImage), StandardCharsets.UTF_8);
             model.addAttribute("image", encoded);
         } else if (format.equals("pie")) {
