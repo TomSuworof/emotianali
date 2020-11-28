@@ -3,13 +3,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap');
 #welcome{
     color: black;
-    padding-top: 15%;
+    padding-top: 10%;
     font-family:  'Cabin Sketch', cursive;;
     padding-left: 23%;
     font-size: 300%;
 }
-#buttons{
-    padding-left: 23%;
+#top{
+    padding-left: 33%;
 }
 .button {
     text-decoration: none;
