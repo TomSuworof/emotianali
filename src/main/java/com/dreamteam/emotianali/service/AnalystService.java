@@ -15,6 +15,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.*;
@@ -117,13 +118,18 @@ public class AnalystService {
         return dataset;
     }
 
-    public File getExcelFile(List<User> users) {
+    private Map<User, List<Tone>> getUsersAndTones(List<User> users) {
         Map<User, List<Tone>> usersAndTones = new HashMap<>();
         for (User user : users) {
             List<Tone> tones = user.getTones();
             tones.sort(Comparator.comparing(Tone::getToneName));
             usersAndTones.put(user, tones);
         }
+        return usersAndTones;
+    }
+
+    public File getExcelFile(List<User> users) {
+        Map<User, List<Tone>> usersAndTones = getUsersAndTones(users);
         try {
             File excelFile = File.createTempFile("statEmotions", ".xlsx");
             HSSFWorkbook workbook = new HSSFWorkbook();
@@ -147,6 +153,27 @@ public class AnalystService {
             workbook.write(excelFile);
             workbook.close();
             return excelFile;
+        } catch (IOException ignored) {
+            return null;
+        }
+    }
+
+    public File getCSVFile(List<User> users) {
+        Map<User, List<Tone>> usersAndTones = getUsersAndTones(users);
+        try {
+            File csvFile = File.createTempFile("statEmotions", ".csv");
+            FileWriter writer = new FileWriter(csvFile);
+            writer.append("Username").append(",");
+
+            List<Tone> tones = (List<Tone>) usersAndTones.values().toArray()[0];
+
+            for (Tone tone : tones) {
+                writer.append(tone.getToneName()).append(",");
+            }
+            writer.append("\n");
+
+            writer.close();
+            return csvFile;
         } catch (IOException ignored) {
             return null;
         }

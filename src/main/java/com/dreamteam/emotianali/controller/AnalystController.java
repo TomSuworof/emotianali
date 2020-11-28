@@ -61,6 +61,9 @@ public class AnalystController {
         } else if (format.equals("excel")) {
             fileStat = analystService.getExcelFile(userService.getAllUsers());
             model.addAttribute("filename", fileStat.getName());
+        } else if (format.equals("csv")) {
+            fileStat = analystService.getCSVFile(userService.getAllUsers());
+            model.addAttribute("filename", fileStat.getName());
         }
         model.addAttribute("allTones", allTones);
         model.addAttribute("header", "Statistics for all users");
