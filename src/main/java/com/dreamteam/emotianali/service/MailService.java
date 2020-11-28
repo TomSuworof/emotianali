@@ -12,23 +12,8 @@ import org.springframework.stereotype.Service;
 public class MailService {
     private final MailConfig mailConfig;
 
-    public boolean send(String to, String link) {
+    public boolean send(String to, boolean passwordReset, String theme) {
         try {
-//            SimpleMailMessage mailMessage = new SimpleMailMessage();
-//
-//            mailMessage.setFrom(Objects.requireNonNull(mailMessage.getFrom()));
-//            mailMessage.setTo(to);
-//            mailMessage.setSubject("Восстановление пароля");
-//            String text = "Вы отправили запрос на восстановление пароля. \n" +
-//                    "Страница для сброса пароля: "
-//                    + new URL(link) +
-//                    "\nЕсли вы не отправляли запрос, проигнорируйте это письмо." +
-//                    "\nКоманда Dreamteam.";
-//            mailMessage.setText(text);
-//
-//
-//            mailSender.send(mailMessage);
-//            return true;
             HtmlEmail email = new HtmlEmail();
             email.setHostName(mailConfig.getHost());
             email.setSmtpPort(mailConfig.getPort());
@@ -39,6 +24,19 @@ public class MailService {
             email.setSSLOnConnect(true);
             email.setFrom(mailConfig.getUsername());
             email.setCharset("utf-8");
+            email.addTo(to);
+            if (passwordReset) {
+                return sendPasswordReset(email, theme);
+            } else {
+                return sendRoleChanged(email, theme);
+            }
+        } catch (EmailException emailException) {
+            return false;
+        }
+    }
+
+    private boolean sendPasswordReset(HtmlEmail email, String link) {
+        try {
             email.setSubject("Password reset");
             email.setHtmlMsg("<html>\n" +
                     "<body>\n" +
@@ -52,8 +50,26 @@ public class MailService {
                     "<p>Dreamteam</p>\n" +
                     "</body>\n" +
                     "</html>");
-            // set the alternative message
-            email.addTo(to);
+            email.send();
+            return true;
+        } catch (EmailException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private boolean sendRoleChanged(HtmlEmail email, String role) {
+        role = role.equals("blocked") ? role : "an " + role;
+        try {
+            email.setSubject("Your role was changed");
+            email.setHtmlMsg("<html>\n" +
+                    "<body>\n" +
+                    "\n" +
+                    "<h1>Your role was changed.</h1\n" +
+                    "<p>Heads of universe decided that you should be " + role + ".</p>\n" +
+                    "<p>Dreamteam</p>\n" +
+                    "</body>\n" +
+                    "</html>");
             email.send();
             return true;
         } catch (EmailException e) {

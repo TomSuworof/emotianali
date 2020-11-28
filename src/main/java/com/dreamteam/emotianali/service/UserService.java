@@ -12,15 +12,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.*;
 import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
-
-    @PersistenceContext
-    private EntityManager em;
+    private final MailService mailService;
 
     private final UserRepository userRepository;
 
@@ -66,10 +63,13 @@ public class UserService implements UserDetailsService {
             return false;
         }
 
+        userFromDB.setImageLink(userFromForm.getImageLink());
         userFromDB.setFirstName(userFromForm.getFirstName());
         userFromDB.setLastName(userFromForm.getLastName());
+        userFromDB.setBirthday(userFromForm.getBirthday());
+        userFromDB.setUserGroup(userFromForm.getUserGroup());
         userFromDB.setEmail(userFromForm.getEmail());
-        userFromDB.setTones(userFromForm.getTones());
+        userFromDB.setRecords(userFromForm.getRecords());
 
         if (passwordWasChanged) {
             return updateWithPassword(userFromDB, userFromForm.getPasswordNew());
@@ -107,7 +107,10 @@ public class UserService implements UserDetailsService {
             userFromDB.setRoles(Collections.singleton(new Role(2L, "ROLE_ANALYST")));
         } else if (role.equals("user")) {
             userFromDB.setRoles(Collections.singleton(new Role(3L, "ROLE_USER")));
+        } else if (role.equals("blocked")) {
+            userFromDB.setRoles(Collections.singleton(new Role(0L, "ROLE_BLOCKED")));
         }
+        mailService.send(userFromDB.getEmail(), false, role);
         userRepository.save(userFromDB);
         return true;
     }
@@ -118,12 +121,8 @@ public class UserService implements UserDetailsService {
         return passwordEncoder.matches(passwordAnother, currentUserPassword);
     }
 
-    public List<User> usergtList(Long idMin) {
-        return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
-                .setParameter("paramId", idMin).getResultList();
-    }
 
-    public List<User> allUsers() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 }

@@ -30,4 +30,8 @@ public class Tone {
         this.toneName = toneName;
         this.score = score;
     }
+
+    public void addScore(Float score) {
+        this.score += score;
+    }
 }

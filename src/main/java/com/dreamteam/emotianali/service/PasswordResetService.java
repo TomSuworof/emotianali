@@ -26,9 +26,10 @@ public class PasswordResetService {
             email = requiredUser.getEmail();
             passwordResetRepository.save(new PasswordResetRequest(id, username, created));
 
-            String link = "http://localhost:8080/password_reset/change_password/" + id;
+            String link = "https://emotianali.herokuapp.com/password_reset/change_password/" + id;
+//            String link = "http://localhost:8080/password_reset/change_password/" + id;
 
-            return mailService.send(email, link);
+            return mailService.send(email,true, link);
 
         } catch (UsernameNotFoundException usernameNotFoundException) {
             return false;
@@ -77,6 +78,28 @@ public class PasswordResetService {
             return userService.updateUser(userForNewPassword, true);
         } catch (UsernameNotFoundException usernameNotFoundException) {
             return false;
+        }
+    }
+
+    public String getSecretQuestion(String id) {
+        Optional<PasswordResetRequest> passwordResetRequest = passwordResetRepository.findById(id);
+
+        if (passwordResetRequest.isPresent()) {
+            User userForNewPassword = (User) userService.loadUserByUsername(passwordResetRequest.get().getUsername());
+            return userForNewPassword.getSecretQuestion();
+        } else {
+            throw new NullPointerException();
+        }
+    }
+
+    public String getSecretAnswer(String id) {
+        Optional<PasswordResetRequest> passwordResetRequest = passwordResetRepository.findById(id);
+
+        if (passwordResetRequest.isPresent()) {
+            User userForNewPassword = (User) userService.loadUserByUsername(passwordResetRequest.get().getUsername());
+            return userForNewPassword.getSecretAnswer();
+        } else {
+            throw new NullPointerException();
         }
     }
 }

@@ -129,6 +129,14 @@
             <version>4.5.13</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.jfree/jfreechart -->
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.1</version>
+        </dependency>
+
+
     </dependencies>
 
 

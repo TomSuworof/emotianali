@@ -9,28 +9,46 @@
 <div>
     <form method="POST" th:modelAttribute="userForm">
         <h2>Sign up</h2>
+        <div>Profile image:
+            <br>
+            <label>
+                <input type="text" name="imageLink" placeholder="Link for profile image" autofocus required>
+            </label>
+        </div>
         <div>First name:
             <br>
             <label>
-                <input type="text" name="firstName" placeholder="First Name" autofocus="autofocus">
+                <input type="text" name="firstName" placeholder="First Name" required>
             </label>
         </div>
-        <div>Second name:
+        <div>Last name:
             <br>
             <label>
-                <input type="text" name="lastName" placeholder="Last Name">
+                <input type="text" name="lastName" placeholder="Last Name" required>
+            </label>
+        </div>
+        <div>Birthday
+            <br>
+            <label>
+                <input type="date" name="birthday" placeholder="Birthday">
+            </label>
+        </div>
+        <div>Group:
+            <br>
+            <label>
+                <input type="text" name="userGroup" placeholder="Group">
             </label>
         </div>
         <div>Email:
             <br>
             <label>
-                <input type="email" name="email" placeholder="Email">
+                <input type="email" name="email" placeholder="Email" required>
             </label>
         </div>
         <div>Username:
             <br>
             <label>
-                <input type="text" name="username" placeholder="Username">
+                <input type="text" name="username" placeholder="Username" required>
             </label>
             <p th:text="${usernameError}"></p>
         </div>
@@ -38,14 +56,32 @@
             Password:
             <br>
             <label>
-                <input type="password" name="password" placeholder="Password">
+                <input type="password" name="password" placeholder="Password" required>
             </label>
         </div>
         <div>
             <label>
-                <input type="password" name="passwordConfirm" placeholder="Confirm your password">
+                <input type="password" name="passwordConfirm" placeholder="Confirm your password" required>
             </label>
             <p th:text="${passwordError}"></p>
+        </div>
+        <div>Secret question
+            <br>
+            <label>
+                <input type="text" name="secretQuestion" placeholder="Enter your secret question" required>
+            </label>
+        </div>
+        <div>Secret answer
+            <br>
+            <label>
+                <input type="text" name="secretAnswer" placeholder="Enter your answer for secret question" required>
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" name="agreement" value="true">I agree with <a href="/terms_of_use">terms of use</a>
+            </label>
+            <p th:text="${agreementError}"></p>
         </div>
         <button type="submit">Sign up</button>
     </form>

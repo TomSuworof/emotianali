@@ -4,6 +4,13 @@
     <meta charset="utf-8">
     <title>Analytics</title>
     <link rel="stylesheet" type="text/css">
+    <style>
+        table, td, th {
+            border-bottom: 1px solid;
+            border-left: 1px solid;
+            vertical-align: top;
+        }
+    </style>
 </head>
 
 <body>
@@ -13,22 +20,19 @@
             <th>ID</th>
             <th>Username</th>
             <th>Tones</th>
-            <th>Roles</th>
         </tr>
         <tr th:each="user : ${allUsers}">
             <td th:text="${user.getId()}"></td>
             <td th:text="${user.getUsername()}"></td>
             <td>
                 <ul th:each="tone : ${user.getTones()}">
-                    <li th:text="${tone.getToneName()}"></li>
+                    <li th:text="${tone.getToneName()} + ' ' + ${tone.getScore()}"></li>
                 </ul>
             </td>
-            <td>
-                <p th:each="role: ${user.getRoles()}"></p>
-            </td>
+
             <td>
                 <form action="/analyst" method="post">
-                    <input type="hidden" name="userId" th:value="${user.id}"/>
+                    <input type="hidden" name="username" th:value="${user.getUsername()}"/>
                     <input type="hidden" name="action" value="get_info"/>
                     <button type="submit">Get info</button>
                 </form>
@@ -36,6 +40,39 @@
         </tr>
     </table>
     <a href="/">Main</a>
+    <div>
+        <h2 th:text="${requiredUsername}"></h2>
+        <ul th:each="tone : ${tones}">
+            <li th:text="${tone.getToneName()} + ' ' + ${tone.getScore()}"></li>
+        </ul>
+    </div>
+</div>
+<div>
+    <div>
+        <form action="/analyst" method="post">
+            <input type="hidden" name="action" value="get_full_info"/>
+            <button type="submit">Get full info</button>
+        </form>
+    </div>
+    <div>
+        <h2 th:text="${header}"></h2>
+        <ul th:each="tone : ${allTones}">
+            <li th:text="${tone.getToneName()} + ' ' + ${tone.getScore()}"></li>
+        </ul>
+        <div th:if="${header != null}">
+            <form action="/analyst/statistics" method="post">
+                <input type="hidden" name="format" value="bar">
+                <button type="submit">Bar chart</button>
+            </form>
+            <form action="/analyst/statistics" method="post">
+                <input type="hidden" name="format" value="pie">
+                <button type="submit">Pie chart</button>
+            </form>
+            <div>
+                <img th:src="*{'data:image/jpg;base64,'+ image}" alt="Image of chart">
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

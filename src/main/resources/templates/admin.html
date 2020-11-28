@@ -4,6 +4,13 @@
     <meta charset="utf-8">
     <title>Admin</title>
     <link rel="stylesheet" type="text/css">
+    <style>
+        table, td, th {
+            border-bottom: 1px solid;
+            border-left: 1px solid;
+            vertical-align: top;
+        }
+    </style>
 </head>
 
 <body>
@@ -28,7 +35,7 @@
                     <form action="/admin" method="post">
                         <input type="hidden" name="userId" th:value="${user.id}"/>
                         <input type="hidden" name="action" value="delete"/>
-                        <button type="submit">Delete</button>
+                        <button type="submit">Delete (block)</button>
                     </form>
                     <form action="/admin" method="post">
                         <input type="hidden" name="userId" th:value="${user.id}"/>

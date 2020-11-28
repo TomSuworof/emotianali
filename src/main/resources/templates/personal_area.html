@@ -6,19 +6,41 @@
 </head>
 
 <body>
-<div th:object="${currentUser}">
+<div>
     <form method="POST" th:modelAttribute="userForm">
         <h2>Personal area</h2>
+        <div>Profile image:
+            <br>
+            <div>
+                <img th:src="${currentUser.getImageLink()}" alt="Profile image">
+            </div>
+            <br>
+            <label>
+                <input type="text" name="imageLink" th:value="${currentUser.getImageLink()}" placeholder="Link for profile image" autofocus>
+            </label>
+        </div>
         <div>First name:
             <br>
             <label>
-                <input type="text" name="firstName" th:value="${currentUser.getFirstName()}" placeholder="First Name" autofocus="autofocus">
+                <input type="text" name="firstName" th:value="${currentUser.getFirstName()}" placeholder="First Name">
             </label>
         </div>
         <div>Last name:
             <br>
             <label>
                 <input type="text" name="lastName" th:value="${currentUser.getLastName()}" placeholder="Last Name">
+            </label>
+        </div>
+        <div>Birthday
+            <br>
+            <label>
+                <input type="date" name="birthday" th:value="${#dates.format(currentUser.getBirthday(), 'yyyy-MM-dd')}" placeholder="Birthday">
+            </label>
+        </div>
+        <div>Group:
+            <br>
+            <label>
+                <input type="text" name="userGroup" th:value="${currentUser.getUserGroup()}" placeholder="Group">
             </label>
         </div>
         <div>Email:
@@ -62,6 +84,21 @@
         </form>
     </div>
     <a href="/">Main</a>
+    <div>
+        <h1>Your assessments:</h1>
+        <div th:each="record : ${currentUser.getRecords()}">
+            <ul>
+                <li>
+                    <div>
+                        <h2 th:text="${record.getText()}"></h2>
+                        <ul th:each="tone : ${record.getTones()}">
+                            <li th:text="${tone.getToneName()} + ' ' + ${tone.getScore()}"></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 </body>
 </html>
