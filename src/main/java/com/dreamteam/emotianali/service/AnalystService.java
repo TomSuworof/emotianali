@@ -15,7 +15,6 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.*;
@@ -126,14 +125,11 @@ public class AnalystService {
             usersAndTones.put(user, tones);
         }
         try {
-//            File excelFile = File.createTempFile("statExcel", ".xlsx");
-            File excelFile = new File("statExcel.xls");
-            HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream(excelFile));
+            File excelFile = File.createTempFile("statEmotions", ".xlsx");
+            HSSFWorkbook workbook = new HSSFWorkbook();
             HSSFSheet sheet = workbook.createSheet("Emotions");
             HSSFRow heading = sheet.createRow(0);
-//            for (int i = 0; i < users.get(0).getTones().size(); i++) {
-//                heading.createCell(i).setCellValue(users.get(0).getTones().get(i).getToneName());
-//            }
+
             List<Tone> tones = (List<Tone>) usersAndTones.values().toArray()[0];
 
             heading.createCell(0).setCellValue("Username");
@@ -142,12 +138,13 @@ public class AnalystService {
             }
             ArrayList<Map.Entry<User, List<Tone>>> notSet = new ArrayList<>(usersAndTones.entrySet());
             for (Map.Entry<User, List<Tone>> pair : notSet) {
-                HSSFRow row = sheet.createRow(notSet.indexOf(pair));
+                HSSFRow row = sheet.createRow(notSet.indexOf(pair) + 1);
                 row.createCell(0).setCellValue(pair.getKey().getUsername());
                 for (int i = 0; i < pair.getValue().size(); i++) {
                     row.createCell(i + 1).setCellValue(pair.getValue().get(i).getScore());
                 }
             }
+            workbook.write(excelFile);
             workbook.close();
             return excelFile;
         } catch (IOException ignored) {

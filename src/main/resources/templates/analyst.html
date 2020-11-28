@@ -68,8 +68,15 @@
                 <input type="hidden" name="format" value="pie">
                 <button type="submit">Pie chart</button>
             </form>
-            <div>
+            <form action="/analyst/statistics" method="post">
+                <input type="hidden" name="format" value="excel">
+                <button type="submit">Excel File</button>
+            </form>
+            <div th:if="${image} != null">
                 <img th:src="*{'data:image/jpg;base64,'+ image}" alt="Image of chart">
+            </div>
+            <div th:if="${filename} != null">
+                <a href="/analyst/statistics/file" download>File</a>
             </div>
         </div>
     </div>
