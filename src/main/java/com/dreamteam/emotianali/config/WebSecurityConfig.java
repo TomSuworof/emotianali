@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/personal_area/**").fullyAuthenticated()
                 .antMatchers("/emotional_assessment/**").fullyAuthenticated()
                 // Доступ разрешен всем пользователей
-                .antMatchers("/", "/terms_of_use").permitAll()
+                .antMatchers("/", "/terms_of_use", "/static/**").permitAll()
                 //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated()
                 .and()

@@ -5,14 +5,16 @@
 #welcome{
     color: black;
     padding-top: 6%;
-    font-family:  'Cabin Sketch', cursive;;
-    padding-left: 20%;
+    font-family: 'Cabin Sketch', cursive;;
     font-size: 350%;
 }
-#top{
-    padding-left: 33%;
+
+#top {
+    text-align: center;
 }
+
 .button {
+    width: 30%;
     text-decoration: none;
     outline: none;
     display: inline-block;

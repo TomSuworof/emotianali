@@ -36,8 +36,10 @@ public class EmotionalController {
         if (text != null) {
             String translated = translateService.translate(text);
             List<Tone> result = toneService.getAssessment(translated);
+            List<String> advices = toneService.getAdvices(result);
             model.addAttribute("text", translated);
             model.addAttribute("result", result);
+            model.addAttribute("advices", advices);
         }
 
         return "emotional_assessment";

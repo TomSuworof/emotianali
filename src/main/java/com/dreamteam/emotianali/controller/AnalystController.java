@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
@@ -56,6 +57,7 @@ public class AnalystController {
             String encoded = new String(Base64.getEncoder().encode(pieChartImage), StandardCharsets.UTF_8);
             model.addAttribute("image", encoded);
         }
+        File stat = analystService.getExcelFile(userService.getAllUsers());
         model.addAttribute("allTones", allTones);
         model.addAttribute("header", "Statistics for all users");
         model.addAttribute("allUsers", userService.getAllUsers());

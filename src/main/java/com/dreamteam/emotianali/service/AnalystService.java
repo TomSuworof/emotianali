@@ -3,6 +3,9 @@ package com.dreamteam.emotianali.service;
 import com.dreamteam.emotianali.entity.Tone;
 import com.dreamteam.emotianali.entity.User;
 import lombok.RequiredArgsConstructor;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
@@ -12,10 +15,10 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -113,5 +116,42 @@ public class AnalystService {
             dataset.setValue( tone.getToneName(), tone.getScore());
         }
         return dataset;
+    }
+
+    public File getExcelFile(List<User> users) {
+        Map<User, List<Tone>> usersAndTones = new HashMap<>();
+        for (User user : users) {
+            List<Tone> tones = user.getTones();
+            tones.sort(Comparator.comparing(Tone::getToneName));
+            usersAndTones.put(user, tones);
+        }
+        try {
+//            File excelFile = File.createTempFile("statExcel", ".xlsx");
+            File excelFile = new File("statExcel.xls");
+            HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream(excelFile));
+            HSSFSheet sheet = workbook.createSheet("Emotions");
+            HSSFRow heading = sheet.createRow(0);
+//            for (int i = 0; i < users.get(0).getTones().size(); i++) {
+//                heading.createCell(i).setCellValue(users.get(0).getTones().get(i).getToneName());
+//            }
+            List<Tone> tones = (List<Tone>) usersAndTones.values().toArray()[0];
+
+            heading.createCell(0).setCellValue("Username");
+            for (int i = 0; i < tones.size(); i++) {
+                heading.createCell(i + 1).setCellValue(tones.get(i).getToneName());
+            }
+            ArrayList<Map.Entry<User, List<Tone>>> notSet = new ArrayList<>(usersAndTones.entrySet());
+            for (Map.Entry<User, List<Tone>> pair : notSet) {
+                HSSFRow row = sheet.createRow(notSet.indexOf(pair));
+                row.createCell(0).setCellValue(pair.getKey().getUsername());
+                for (int i = 0; i < pair.getValue().size(); i++) {
+                    row.createCell(i + 1).setCellValue(pair.getValue().get(i).getScore());
+                }
+            }
+            workbook.close();
+            return excelFile;
+        } catch (IOException ignored) {
+            return null;
+        }
     }
 }
