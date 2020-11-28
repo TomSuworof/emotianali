@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 // Доступ только для пользователей с ролью Аналитик
                 .antMatchers("/analyst/**").hasRole("ANALYST")
-                // Доступ для зарегестрированных пользователей (USER, ANALYST, ADMIN) // todo - пересмотреть права
+                // Доступ для зарегестрированных пользователей (USER, ANALYST, ADMIN)
                 .antMatchers("/personal_area/**").fullyAuthenticated()
                 .antMatchers("/emotional_assessment/**").fullyAuthenticated()
                 // Доступ разрешен всем пользователей

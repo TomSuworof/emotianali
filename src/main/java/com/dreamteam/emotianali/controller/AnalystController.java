@@ -38,7 +38,7 @@ public class AnalystController {
             model.addAttribute("tones", userTones);
             model.addAttribute("requiredUsername", username);
         } else if (action.equals("get_full_info")) {
-            List<Tone> allTones = analystService.getAllInfo();
+            List<Tone> allTones = analystService.getFullInfo();
             model.addAttribute("allTones", allTones);
             model.addAttribute("header", "Statistics for all users");
         }
@@ -48,7 +48,7 @@ public class AnalystController {
 
     @PostMapping("/analyst/statistics")
     public String getStatistics(@RequestParam String format, Model model) {
-        List<Tone> allTones = analystService.getAllInfo();
+        List<Tone> allTones = analystService.getFullInfo();
 
         if (format.equals("bar")) {
             byte[] barChartImage = analystService.getBarChartImage(allTones);

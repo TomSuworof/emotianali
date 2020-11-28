@@ -29,7 +29,7 @@ public class AnalystService {
         return requiredUser.getTones();
     }
 
-    public List<Tone> getAllInfo() {
+    public List<Tone> getFullInfo() {
         List<User> users = userService.getAllUsers();
         Tone anger = new Tone("Anger", (float) 0);
         Tone fear = new Tone("Fear", (float) 0);
