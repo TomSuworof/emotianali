@@ -6,7 +6,9 @@
     <title>Start page</title>
     <link href="../static/css/style_index.css" rel="stylesheet" type="text/css" media="all" />
 </head>
-<body style="background-image:url(../images/primer-img.jpg)">
+<body>
+
+
 <h1 id="welcome">Welcome to Emotional assessment</h1>
 <div id="top">
 
@@ -17,22 +19,22 @@
     </div>
     <div th:if="${show_personal_area}">
         <form action="/personal_area">
-            <button class="button">Personal area</button>
+            <button style="margin-left: 10%" class="button">Personal area</button>
         </form>
     </div>
     <div th:if="${show_logout}">
         <form action="/logout">
-            <button class="button">Logout</button>
+            <button style="margin-left: 14%" class="button">Logout</button>
         </form>
     </div>
     <div th:if="${show_admin_page}">
         <form action="/admin">
-            <button class="button">Admin</button>
+            <button  style="margin-left: 14.8%" class="button">Admin</button>
         </form>
     </div>
     <div th:if="${show_analyst_page}">
         <form action="/analyst">
-            <button class="button">Analyst</button>
+            <button style="margin-left: 13.5%" class="button">Analyst</button>
         </form>
     </div>
 </div>
