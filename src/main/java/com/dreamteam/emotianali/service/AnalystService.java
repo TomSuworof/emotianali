@@ -3,20 +3,14 @@ package com.dreamteam.emotianali.service;
 import com.dreamteam.emotianali.entity.Tone;
 import com.dreamteam.emotianali.entity.User;
 import lombok.RequiredArgsConstructor;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartUtils;
-import org.jfree.chart.JFreeChart;
+import org.apache.poi.hssf.usermodel.*;
+import org.jfree.chart.*;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.util.*;
 
@@ -128,10 +122,10 @@ public class AnalystService {
         return usersAndTones;
     }
 
-    public File getExcelFile(List<User> users) {
+    public File getXLSXFile(List<User> users) {
         Map<User, List<Tone>> usersAndTones = getUsersAndTones(users);
         try {
-            File excelFile = File.createTempFile("statEmotions", ".xlsx");
+            File xlsxFile = File.createTempFile("statEmotions", ".xlsx");
             HSSFWorkbook workbook = new HSSFWorkbook();
             HSSFSheet sheet = workbook.createSheet("Emotions");
             HSSFRow heading = sheet.createRow(0);
@@ -150,9 +144,9 @@ public class AnalystService {
                     row.createCell(i + 1).setCellValue(pair.getValue().get(i).getScore());
                 }
             }
-            workbook.write(excelFile);
+            workbook.write(xlsxFile);
             workbook.close();
-            return excelFile;
+            return xlsxFile;
         } catch (IOException ignored) {
             return null;
         }
@@ -168,9 +162,23 @@ public class AnalystService {
             List<Tone> tones = (List<Tone>) usersAndTones.values().toArray()[0];
 
             for (Tone tone : tones) {
-                writer.append(tone.getToneName()).append(",");
+                writer.append(tone.getToneName());
+                if (tones.indexOf(tone) != tones.size() - 1) {
+                    writer.append(",");
+                }
             }
             writer.append("\n");
+
+            for (Map.Entry<User, List<Tone>> pair : usersAndTones.entrySet()) {
+                writer.append(pair.getKey().getUsername()).append(",");
+                for (Tone tone : pair.getValue()) {
+                    writer.append(String.valueOf(tone.getScore()));
+                    if (pair.getValue().indexOf(tone) != pair.getValue().size() - 1) {
+                        writer.append(",");
+                    }
+                }
+                writer.append("\n");
+            }
 
             writer.close();
             return csvFile;

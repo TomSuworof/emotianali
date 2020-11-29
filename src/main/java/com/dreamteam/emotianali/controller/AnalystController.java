@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -59,11 +58,11 @@ public class AnalystController {
             String encoded = new String(Base64.getEncoder().encode(pieChartImage), StandardCharsets.UTF_8);
             model.addAttribute("image", encoded);
         } else if (format.equals("excel")) {
-            fileStat = analystService.getExcelFile(userService.getAllUsers());
-            model.addAttribute("filename", fileStat.getName());
+            fileStat = analystService.getXLSXFile(userService.getAllUsers());
+            model.addAttribute("filenameXLSX", fileStat.getName());
         } else if (format.equals("csv")) {
             fileStat = analystService.getCSVFile(userService.getAllUsers());
-            model.addAttribute("filename", fileStat.getName());
+            model.addAttribute("filenameCSV", fileStat.getName());
         }
         model.addAttribute("allTones", allTones);
         model.addAttribute("header", "Statistics for all users");
@@ -71,9 +70,17 @@ public class AnalystController {
         return "analyst";
     }
 
-    @RequestMapping(value = "/analyst/statistics/file", method = RequestMethod.GET, produces = "application/xlsx")
-    public @ResponseBody Resource getFile(HttpServletResponse response) {
+    @RequestMapping(value = "/analyst/statistics/xlsx", method = RequestMethod.GET, produces = "application/xlsx")
+    public @ResponseBody Resource getFileXLSX(HttpServletResponse response) {
         response.setContentType("application/xlsx");
+        response.setHeader("Content-Disposition", "inline; filename=" + fileStat.getName());
+        response.setHeader("Content-Length", String.valueOf(fileStat.length()));
+        return new FileSystemResource(fileStat);
+    }
+
+    @RequestMapping(value = "/analyst/statistics/csv", method = RequestMethod.GET, produces = "application/csv")
+    public @ResponseBody Resource getFileCSV(HttpServletResponse response) {
+        response.setContentType("application/csv");
         response.setHeader("Content-Disposition", "inline; filename=" + fileStat.getName());
         response.setHeader("Content-Length", String.valueOf(fileStat.length()));
         return new FileSystemResource(fileStat);

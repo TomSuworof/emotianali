@@ -73,7 +73,7 @@
                     <input type="hidden" name="format" value="excel">
                     <button type="submit">Excel File</button>
                 </form>
-                <form action="/admin/statistics" method="post">
+                <form action="/analyst/statistics" method="post">
                     <input type="hidden" name="format" value="csv">
                     <button type="submit">CSV File</button>
                 </form>
@@ -81,8 +81,11 @@
             <div th:if="${image} != null">
                 <img th:src="*{'data:image/jpg;base64,'+ image}" alt="Image of chart">
             </div>
-            <div th:if="${filename} != null">
-                <a href="/analyst/statistics/file" download>File</a>
+            <div th:if="${filenameXLSX} != null">
+                <a href="/analyst/statistics/xlsx" download>File</a>
+            </div>
+            <div th:if="${filenameCSV} != null">
+                <a href="/analyst/statistics/csv" download>File</a>
             </div>
         </div>
     </div>

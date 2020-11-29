@@ -56,7 +56,7 @@ public class AdminController {
     public String getStatistics(@RequestParam String format,
                                 Model model) {
         if (format.equals("excel")) {
-            fileStat = analystService.getExcelFile(userService.getAllUsers());
+            fileStat = analystService.getXLSXFile(userService.getAllUsers());
             model.addAttribute("filename", fileStat.getName());
         }
         List<Tone> allTones = analystService.getFullInfo();
