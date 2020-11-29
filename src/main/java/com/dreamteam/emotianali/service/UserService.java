@@ -22,7 +22,7 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Autowired
-    PasswordEncoder passwordEncoder; // с этим надо что-то сделать, наверное, но я хз
+    PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

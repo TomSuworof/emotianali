@@ -43,6 +43,7 @@ public class PersonalAreaController {
         } else {
             userFromForm.setId(currentUser.getId());
             userFromForm.setUsername(currentUser.getUsername()); // смешали currentUser и данные из формы
+            userFromForm.setRecords(currentUser.getRecords());
             boolean passwordWasChanged;
             if (userFromForm.getPasswordNew().isEmpty() && userFromForm.getPasswordNewConfirm().isEmpty()) {
                 passwordWasChanged = false;
