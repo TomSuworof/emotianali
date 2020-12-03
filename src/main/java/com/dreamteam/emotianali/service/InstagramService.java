@@ -1,12 +1,8 @@
 package com.dreamteam.emotianali.service;
 
 import com.dreamteam.emotianali.entity.InstagramPost;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import org.apache.http.client.fluent.Form;
-import org.apache.http.client.fluent.Request;
+import com.google.gson.*;
+import org.apache.http.client.fluent.*;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;

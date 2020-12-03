@@ -2,7 +2,6 @@ package com.dreamteam.emotianali.controller;
 
 import com.dreamteam.emotianali.entity.User;
 import com.dreamteam.emotianali.service.UserService;
-import com.google.gson.Gson;
 import lombok.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,15 +24,6 @@ public class PersonalAreaController {
 
     @PostMapping("/personal_area")
     public String updateUserFromForm(@ModelAttribute("userForm") User userFromForm, Model model) {
-        /*
-           что нужно делать по приходе формы
-           1. проверить, правильно ли пользователь пароль для подтвержения изменений. если нет, то вернуть с ошибкой
-                если правильно, то можно начинать перезапись пользователя
-           2. перезапись пользователя
-                1. проверить, надо ли менять пароль. если да, то провести с ним операцию проверки и перезаписи
-                    если нет, то не менять и перезаписать остальные записи
-           3. если всё ок, то вернуться на стартовую страницу
-         */
         User currentUser = userService.getUserFromContext();
         model.addAttribute("currentUser", currentUser);
 
@@ -59,12 +49,12 @@ public class PersonalAreaController {
                 model.addAttribute("error", "Something went wrong");
                 return "personal_area";
             }
+            return "redirect:/logout";
         }
-        return "redirect:/logout";
     }
 
     @GetMapping("/personal_area/delete_account")
-    public String deleteAccount(Model model) {
+    public String deleteAccount() {
         User currentUser = userService.getUserFromContext();
         userService.changeRole(currentUser.getId(), "blocked");
         return "redirect:/logout";

@@ -4,8 +4,7 @@ import com.dreamteam.emotianali.entity.Tone;
 import com.dreamteam.emotianali.service.AnalystService;
 import com.dreamteam.emotianali.service.UserService;
 import lombok.*;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
+import org.springframework.core.io.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -49,20 +48,27 @@ public class AnalystController {
     public String getStatistics(@RequestParam String format, Model model) {
         List<Tone> allTones = analystService.getFullInfo();
 
-        if (format.equals("bar")) {
-            byte[] barChartImage = analystService.getBarChartImage(allTones);
-            String encoded = new String(Base64.getEncoder().encode(barChartImage), StandardCharsets.UTF_8);
-            model.addAttribute("image", encoded);
-        } else if (format.equals("pie")) {
-            byte[] pieChartImage = analystService.returnPieChartImage(allTones);
-            String encoded = new String(Base64.getEncoder().encode(pieChartImage), StandardCharsets.UTF_8);
-            model.addAttribute("image", encoded);
-        } else if (format.equals("excel")) {
-            fileStat = analystService.getXLSXFile(userService.getAllUsers());
-            model.addAttribute("filenameXLSX", fileStat.getName());
-        } else if (format.equals("csv")) {
-            fileStat = analystService.getCSVFile(userService.getAllUsers());
-            model.addAttribute("filenameCSV", fileStat.getName());
+        switch (format) {
+            case "bar": {
+                byte[] barChartImage = analystService.getBarChartImage(allTones);
+                String encoded = new String(Base64.getEncoder().encode(barChartImage), StandardCharsets.UTF_8);
+                model.addAttribute("image", encoded);
+                break;
+            }
+            case "pie": {
+                byte[] pieChartImage = analystService.returnPieChartImage(allTones);
+                String encoded = new String(Base64.getEncoder().encode(pieChartImage), StandardCharsets.UTF_8);
+                model.addAttribute("image", encoded);
+                break;
+            }
+            case "excel":
+                fileStat = analystService.getXLSXFile(userService.getAllUsers());
+                model.addAttribute("filenameXLSX", fileStat.getName());
+                break;
+            case "csv":
+                fileStat = analystService.getCSVFile(userService.getAllUsers());
+                model.addAttribute("filenameCSV", fileStat.getName());
+                break;
         }
         model.addAttribute("allTones", allTones);
         model.addAttribute("header", "Statistics for all users");

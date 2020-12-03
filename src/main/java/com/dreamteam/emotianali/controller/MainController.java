@@ -38,8 +38,3 @@ public class MainController {
         return "terms_of_use";
     }
 }
-
-/* todo
-    - пробежаться и удалить комменты
-    - сделать документацию в README
-*/

@@ -21,9 +21,7 @@ public class ToneService {
     private final String URL = System.getenv("TONE_URL");
 
     public List<Tone> getAssessment(String text) {
-        String assessment = getJSONAssessment(text);
-        JsonArray tonesJson = parseJson(assessment);
-        List<Tone> tones = collectTones(tonesJson);
+        List<Tone> tones = collectTones(parseJson(getJSONAssessment(text)));
 
         if (addUserAssessments(text, tones)) {
             return tones;

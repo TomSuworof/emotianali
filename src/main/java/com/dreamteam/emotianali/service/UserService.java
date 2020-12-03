@@ -103,12 +103,16 @@ public class UserService implements UserDetailsService {
         if (!deleteUser(userId)) {
             return false;
         }
-        if (role.equals("analyst")) {
-            userFromDB.setRoles(Collections.singleton(new Role(2L, "ROLE_ANALYST")));
-        } else if (role.equals("user")) {
-            userFromDB.setRoles(Collections.singleton(new Role(3L, "ROLE_USER")));
-        } else if (role.equals("blocked")) {
-            userFromDB.setRoles(Collections.singleton(new Role(0L, "ROLE_BLOCKED")));
+        switch (role) {
+            case "analyst":
+                userFromDB.setRoles(Collections.singleton(new Role(2L, "ROLE_ANALYST")));
+                break;
+            case "user":
+                userFromDB.setRoles(Collections.singleton(new Role(3L, "ROLE_USER")));
+                break;
+            case "blocked":
+                userFromDB.setRoles(Collections.singleton(new Role(0L, "ROLE_BLOCKED")));
+                break;
         }
         mailService.send(userFromDB.getEmail(), false, role);
         userRepository.save(userFromDB);
@@ -120,7 +124,6 @@ public class UserService implements UserDetailsService {
         String currentUserPassword = currentUser.getPassword();
         return passwordEncoder.matches(passwordAnother, currentUserPassword);
     }
-
 
     public List<User> getAllUsers() {
         return userRepository.findAll();

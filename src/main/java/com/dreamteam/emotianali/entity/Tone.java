@@ -1,7 +1,6 @@
 package com.dreamteam.emotianali.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;

@@ -2,9 +2,7 @@ package com.dreamteam.emotianali.service;
 
 import com.dreamteam.emotianali.config.MailConfig;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail.*;
 import org.springframework.stereotype.Service;
 
 @Service

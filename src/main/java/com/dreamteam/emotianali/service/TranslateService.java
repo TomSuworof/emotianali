@@ -15,8 +15,7 @@ public class TranslateService {
 
     public String translate(String text) {
         try {
-            String result = translateJSON(text);
-            return getTranslation(result);
+            return getTranslation(translateJSON(text));
         } catch (NotFoundException languageError) {
             return text;
         }
