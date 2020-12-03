@@ -1,32 +1,84 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@100&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&family=Amatic+SC&family=Kaushan+Script&family=Mali&family=Merienda&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Padauk&display=swap');
 #welcome{
     color: black;
     padding-top: 6%;
-    font-family: 'Cabin Sketch', cursive;;
+    font-family: 'Aclonica', sans-serif;
     font-size: 350%;
 }
 
-#top {
+body{
+    height: 1000px;
+    background: radial-gradient(white, #DCDCDC);
+}
+#main {
     text-align: center;
+    font-family: 'Padauk', sans-serif;
+}
+.arrow-7 {
+    margin: 40px auto 10px auto;
+    width: 38px;
+    height: 100px;
+}
+.arrow-7 span {
+    display: block;
+    width: 25px;
+    height: 25px;
+    border-bottom: 5px solid #DC143C;
+    border-right: 5px solid #DC143C;
+    transform: rotate(180deg);
+    margin: -16px 0;
+    animation: arrow-7 2s infinite;
+}
+.arrow-7 span:nth-child(2){
+    animation-delay: -0.2s;
+}
+.arrow-7 span:nth-child(3){
+    animation-delay: -0.4s;
+}
+@keyframes arrow-7 {
+    0%{
+        opacity: 0;
+        transform: translate(0,50px) rotate(180deg);
+        transform-origin: bottom right;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        transform: translate(0,20px) rotate(180deg);
+    }
 }
 
 .button {
-    width: 30%;
+    color: #45A0A4;
+    background: -webkit-linear-gradient(right, #D3D3D3 0, #D3D3D3 33.3%, #DC143C 33.3%, #DC143C 66.6%, #58554B 66.6%, #58554B) bottom no-repeat;
+    background: -o-linear-gradient(right,#D3D3D3 0, #D3D3D3 33.3%, #DC143C 33.3%, #DC143C 66.6%, #58554B 66.6%, #58554B) bottom no-repeat;
+    background: linear-gradient(to right, #D3D3D3 0, #D3D3D3 33.3%, #DC143C 33.3%, #DC143C 66.6%, #58554B 66.6%, #58554B) bottom no-repeat;
+    background-size: 70% 5px;
+    width: 20%;
     text-decoration: none;
     outline: none;
-    display: inline-block;
-    color: white;
-    padding: 20px 30px;
+    font-family: 'Padauk', sans-serif;
+    color: black;
+    font-size: 23px;
+    padding: 10px 15px;
     margin: 10px 20px;
-    border-radius: 10px;
-    font-family: 'Montserrat', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+}
+.button:hover {background-size: 100% 5px;}
+
+.buttonN {
+    width: 20%;
+    text-decoration: none;
+    outline: none;
+    font-family: 'Padauk', sans-serif;
+    color: white;
+    font-size: 15px;
+    padding: 10px 15px;
+    margin: 10px 20px;
     background-image: linear-gradient(to right, #8B0000 0%, #B22222 51%, #FF0000 100%);
     background-size: 200% auto;
     box-shadow: 0 0 20px rgba(0,0,0,.1);
-    transition: .5s;
 }
