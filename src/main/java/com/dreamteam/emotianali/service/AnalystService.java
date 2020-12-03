@@ -60,6 +60,12 @@ public class AnalystService {
         return Arrays.asList(anger, fear, joy, sadness, analytical, confident);
     }
 
+    public List<Tone> getAverageInfo() {
+        List<Tone> tones = getFullInfo();
+        tones.forEach(tone -> tone.setScore(tone.getScore() / userService.getAllUsers().size()));
+        return tones;
+    }
+
     public byte[] getBarChartImage(List<Tone> tones) {
         try {
             File barChartImage = File.createTempFile( "barChart", ".jpeg");

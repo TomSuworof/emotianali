@@ -53,6 +53,10 @@
             <input type="hidden" name="action" value="get_full_info"/>
             <button type="submit">Get full info</button>
         </form>
+        <form action="/analyst" method="post">
+            <input type="hidden" name="action" value="get_average_info"/>
+            <button type="submit">Get average info</button>
+        </form>
     </div>
     <div>
         <h2 th:text="${header}"></h2>

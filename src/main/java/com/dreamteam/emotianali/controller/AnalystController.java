@@ -31,14 +31,22 @@ public class AnalystController {
     public String getInfo(@RequestParam(defaultValue = "") String username,
                           @RequestParam(defaultValue = "") String action,
                           Model model) {
-        if (action.equals("get_info")) {
-            List<Tone> userTones = analystService.getUserInfo(username);
-            model.addAttribute("tones", userTones);
-            model.addAttribute("requiredUsername", username);
-        } else if (action.equals("get_full_info")) {
-            List<Tone> allTones = analystService.getFullInfo();
-            model.addAttribute("allTones", allTones);
-            model.addAttribute("header", "Statistics for all users");
+        switch (action) {
+            case "get_info":
+                List<Tone> userTones = analystService.getUserInfo(username);
+                model.addAttribute("tones", userTones);
+                model.addAttribute("requiredUsername", username);
+                break;
+            case "get_full_info":
+                List<Tone> allTones = analystService.getFullInfo();
+                model.addAttribute("allTones", allTones);
+                model.addAttribute("header", "Statistics for all users");
+                break;
+            case "get_average_info":
+                List<Tone> allToneAverage = analystService.getAverageInfo();
+                model.addAttribute("allTones", allToneAverage);
+                model.addAttribute("header", "Average figures of emotions of users");
+                break;
         }
         model.addAttribute("allUsers", userService.getAllUsers());
         return "analyst";
