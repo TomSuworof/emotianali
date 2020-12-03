@@ -61,6 +61,12 @@ public class AnalystController {
                 model.addAttribute("image", encoded);
                 break;
             }
+            case "radar": {
+                byte[] radarChartImage = analystService.returnRadarChartImage(allTones);
+                String encoded = new String(Base64.getEncoder().encode(radarChartImage), StandardCharsets.UTF_8);
+                model.addAttribute("image", encoded);
+                break;
+            }
             case "excel":
                 fileStat = analystService.getXLSXFile(userService.getAllUsers());
                 model.addAttribute("filenameXLSX", fileStat.getName());
