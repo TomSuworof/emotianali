@@ -37,4 +37,9 @@ public class MainController {
     public String returnTermsOfUse() {
         return "terms_of_use";
     }
+
+    @RequestMapping("favicon.ico")
+    public String returnFavicon() {
+        return "forward:/public/img/favicon.png";
+    }
 }

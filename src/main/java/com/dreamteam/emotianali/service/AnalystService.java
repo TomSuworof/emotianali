@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.apache.poi.hssf.usermodel.*;
 import org.jfree.chart.*;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.SpiderWebPlot;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.io.*;
 import java.nio.file.Files;
 import java.util.*;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -57,6 +60,12 @@ public class AnalystService {
         return Arrays.asList(anger, fear, joy, sadness, analytical, confident);
     }
 
+    public List<Tone> getAverageInfo() {
+        List<Tone> tones = getFullInfo();
+        tones.forEach(tone -> tone.setScore(tone.getScore() / userService.getAllUsers().size()));
+        return tones;
+    }
+
     public byte[] getBarChartImage(List<Tone> tones) {
         try {
             File barChartImage = File.createTempFile( "barChart", ".jpeg");
@@ -78,7 +87,7 @@ public class AnalystService {
         );
     }
 
-    private DefaultCategoryDataset getBarDataset(List<Tone> tones) {
+    private CategoryDataset getBarDataset(List<Tone> tones) {
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (Tone tone : tones) {
             dataset.addValue(tone.getScore(), tone.getToneName(), "Emotions of users");
@@ -107,7 +116,29 @@ public class AnalystService {
     private DefaultPieDataset getPieDataset(List<Tone> tones) {
         final DefaultPieDataset dataset = new DefaultPieDataset();
         for (Tone tone : tones) {
-            dataset.setValue( tone.getToneName(), tone.getScore());
+            dataset.setValue(tone.getToneName(), tone.getScore());
+        }
+        return dataset;
+    }
+
+    public byte[] returnRadarChartImage(List<Tone> tones) {
+        try {
+            File radarChartImage = File.createTempFile("radarChart", ".jpeg");
+            ChartUtils.saveChartAsJPEG(radarChartImage, getRadarChart(tones), 480, 640);
+            return Files.readAllBytes(radarChartImage.toPath());
+        } catch (IOException ignored) {
+            return null;
+        }
+    }
+
+    private JFreeChart getRadarChart(List<Tone> tones) {
+        return new JFreeChart("Emotions of users", new SpiderWebPlot(getRadarDataset(tones)));
+    }
+
+    private CategoryDataset getRadarDataset(List<Tone> tones) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (Tone tone : tones) {
+            dataset.addValue(tone.getScore(), tone.getToneName(), tone.getToneName());
         }
         return dataset;
     }
