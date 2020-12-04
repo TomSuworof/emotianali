@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Personal area</title>
     <link href="../static/css/password_check.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../static/css/style_index.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
 <div>
@@ -91,7 +92,7 @@
         </form>
     </div>
     <a href="/">Main</a>
-    <div>
+    <div >
         <h1>Your assessments:</h1>
         <div th:each="record : ${currentUser.getRecords()}">
             <ul>
