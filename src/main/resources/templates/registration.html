@@ -13,7 +13,7 @@
         <div>Profile image:
             <br>
             <label>
-                <input type="text" name="imageLink" placeholder="Link for profile image" autofocus required>
+                <input type="text" name="imageLink" placeholder="Link for profile image" autofocus>
             </label>
         </div>
         <div>First name:
@@ -87,7 +87,7 @@
         </div>
         <div>
             <label>
-                <input type="checkbox" name="agreement" value="true">I agree with <a href="/terms_of_use">terms of use</a>
+                <input type="checkbox" name="agreement" value="true" required>I agree with <a href="/terms_of_use">terms of use</a>
             </label>
             <p th:text="${agreementError}"></p>
         </div>

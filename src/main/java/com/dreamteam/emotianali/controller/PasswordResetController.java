@@ -18,11 +18,11 @@ public class PasswordResetController {
 
     @GetMapping("/password_reset/send")
     public String sendPasswordResetRequest(@RequestParam String username, Model model) {
-        if (!passwordResetService.send(username)) {
-            model.addAttribute("message", "User with this username does not exist");
-        } else {
+        if (passwordResetService.send(username)) {
             model.addAttribute("message", "Message was sent to " + passwordResetService.getEmail());
             model.addAttribute("note", "If you do not see it, check Spam");
+        } else {
+            model.addAttribute("message", "User with this username does not exist");
         }
         return "password_reset";
     }

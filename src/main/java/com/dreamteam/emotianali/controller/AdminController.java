@@ -57,8 +57,7 @@ public class AdminController {
     }
 
     @PostMapping("/admin/statistics")
-    public String getStatistics(@RequestParam String format,
-                                Model model) {
+    public String getStatistics(@RequestParam String format, Model model) {
         if (format.equals("excel")) {
             fileStat = analystService.getXLSXFile(userService.getAllUsers());
             model.addAttribute("filename", fileStat.getName());

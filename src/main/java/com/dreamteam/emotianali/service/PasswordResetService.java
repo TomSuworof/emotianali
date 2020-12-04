@@ -28,7 +28,7 @@ public class PasswordResetService {
 
             String link = "https://emotianali.herokuapp.com/password_reset/change_password/" + id;
 
-            return mailService.send(email,true, link);
+            return mailService.send(email, true, link);
 
         } catch (UsernameNotFoundException usernameNotFoundException) {
             return false;

@@ -27,10 +27,7 @@ public class PersonalAreaController {
         User currentUser = userService.getUserFromContext();
         model.addAttribute("currentUser", currentUser);
 
-        if (!userService.isCurrentPasswordSameAs(userFromForm.getPassword())) {
-            model.addAttribute("error", "Wrong password");
-            return "personal_area";
-        } else {
+        if (userService.isCurrentPasswordSameAs(userFromForm.getPassword())) {
             userFromForm.setId(currentUser.getId());
             userFromForm.setUsername(currentUser.getUsername()); // смешали currentUser и данные из формы
             userFromForm.setRecords(currentUser.getRecords());
@@ -38,11 +35,11 @@ public class PersonalAreaController {
             if (userFromForm.getPasswordNew().isEmpty() && userFromForm.getPasswordNewConfirm().isEmpty()) {
                 passwordWasChanged = false;
             } else {
-                if (!userFromForm.getPasswordNew().equals(userFromForm.getPasswordNewConfirm())) {
+                if (userFromForm.getPasswordNew().equals(userFromForm.getPasswordNewConfirm())) {
+                    passwordWasChanged = true;
+                } else {
                     model.addAttribute("error", "Passwords do not match");
                     return "personal_area";
-                } else {
-                    passwordWasChanged = true;
                 }
             }
             if (!userService.updateUser(userFromForm, passwordWasChanged)) {
@@ -50,6 +47,9 @@ public class PersonalAreaController {
                 return "personal_area";
             }
             return "redirect:/logout";
+        } else {
+            model.addAttribute("error", "Wrong password");
+            return "personal_area";
         }
     }
 

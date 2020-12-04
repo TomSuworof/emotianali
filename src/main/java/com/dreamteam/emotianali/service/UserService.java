@@ -89,7 +89,7 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
-    public boolean deleteUser(Long userId) {
+    private boolean deleteUser(Long userId) {
         if (userRepository.findById(userId).isPresent()) {
             userRepository.deleteById(userId);
             return true;
@@ -103,6 +103,7 @@ public class UserService implements UserDetailsService {
         if (!deleteUser(userId)) {
             return false;
         }
+
         switch (role) {
             case "analyst":
                 userFromDB.setRoles(Collections.singleton(new Role(2L, "ROLE_ANALYST")));
