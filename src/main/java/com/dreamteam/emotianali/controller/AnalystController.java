@@ -58,19 +58,19 @@ public class AnalystController {
 
         switch (format) {
             case "bar": {
-                byte[] barChartImage = analystService.getBarChartImage(allTones);
+                byte[] barChartImage = analystService.getBarChart(allTones);
                 String encoded = new String(Base64.getEncoder().encode(barChartImage), StandardCharsets.UTF_8);
                 model.addAttribute("image", encoded);
                 break;
             }
             case "pie": {
-                byte[] pieChartImage = analystService.returnPieChartImage(allTones);
+                byte[] pieChartImage = analystService.getPieChart(allTones);
                 String encoded = new String(Base64.getEncoder().encode(pieChartImage), StandardCharsets.UTF_8);
                 model.addAttribute("image", encoded);
                 break;
             }
             case "radar": {
-                byte[] radarChartImage = analystService.returnRadarChartImage(allTones);
+                byte[] radarChartImage = analystService.getRadarChart(allTones);
                 String encoded = new String(Base64.getEncoder().encode(radarChartImage), StandardCharsets.UTF_8);
                 model.addAttribute("image", encoded);
                 break;
