@@ -115,7 +115,7 @@ public class UserService implements UserDetailsService {
                 userFromDB.setRoles(Collections.singleton(new Role(0L, "ROLE_BLOCKED")));
                 break;
         }
-        mailService.send(userFromDB.getEmail(), false, role);
+        mailService.send(userFromDB.getEmail(), "role_change", role);
         userRepository.save(userFromDB);
         return true;
     }

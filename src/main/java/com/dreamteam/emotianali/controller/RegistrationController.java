@@ -1,6 +1,7 @@
 package com.dreamteam.emotianali.controller;
 
 import com.dreamteam.emotianali.entity.User;
+import com.dreamteam.emotianali.service.MailService;
 import com.dreamteam.emotianali.service.UserService;
 import lombok.*;
 import org.springframework.stereotype.Controller;
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequiredArgsConstructor
 public class RegistrationController {
-
     private final UserService userService;
+    private final MailService mailService;
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -21,7 +22,10 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(@ModelAttribute("userForm") User userForm, String agreement, BindingResult bindingResult, Model model) {
+    public String addUser(@ModelAttribute("userForm") User userForm,
+                          String agreement,
+                          BindingResult bindingResult,
+                          Model model) {
         if (agreement == null) {
             model.addAttribute("agreementError", "In order to use service you should agree with terms of use");
             return "registration";
@@ -33,11 +37,12 @@ public class RegistrationController {
             model.addAttribute("passwordError", "Passwords do not match");
             return "registration";
         }
-        if (!userService.saveUser(userForm)){
+        if (userService.saveUser(userForm)){
+            mailService.send(userForm.getEmail(), "registration_confirm", userForm.getFirstName());
+            return "redirect:/";
+        } else {
             model.addAttribute("usernameError", "Username unavailable");
             return "registration";
         }
-
-        return "redirect:/";
     }
 }

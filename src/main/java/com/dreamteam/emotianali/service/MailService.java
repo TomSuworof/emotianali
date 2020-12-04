@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class MailService {
     private final MailConfig mailConfig;
 
-    public boolean send(String to, boolean passwordReset, String theme) {
+    public boolean send(String to, String theme, String message) {
         try {
             HtmlEmail email = new HtmlEmail();
             email.setHostName(mailConfig.getHost());
@@ -23,10 +23,15 @@ public class MailService {
             email.setFrom(mailConfig.getUsername());
             email.setCharset("utf-8");
             email.addTo(to);
-            if (passwordReset) {
-                return sendPasswordReset(email, theme);
-            } else {
-                return sendRoleChanged(email, theme);
+            switch (theme) {
+                case "password_change":
+                    return sendPasswordReset(email, message);
+                case "role_change":
+                    return sendRoleChanged(email, message);
+                case "registration_confirm":
+                    return sendRegistrationConfirm(email, message);
+                default:
+                    return false;
             }
         } catch (EmailException emailException) {
             return false;
@@ -45,7 +50,7 @@ public class MailService {
                     "\n" +
                     "</p>\n" +
                     "<p>If you did not send the request, ignore this message.</p>\n" +
-                    "<p>Dreamteam</p>\n" +
+                    "<p>Dreamteam <3</p>\n" +
                     "</body>\n" +
                     "</html>");
             email.send();
@@ -65,7 +70,27 @@ public class MailService {
                     "\n" +
                     "<h1>Your role was changed.</h1\n" +
                     "<p>Heads of universe decided that you should be " + role + ".</p>\n" +
-                    "<p>Dreamteam</p>\n" +
+                    "<p>Dreamteam <3</p>\n" +
+                    "</body>\n" +
+                    "</html>");
+            email.send();
+            return true;
+        } catch (EmailException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private boolean sendRegistrationConfirm(HtmlEmail email, String name) {
+        try {
+            email.setSubject("Welcome to Emotianali!");
+            email.setHtmlMsg("<html>\n" +
+                    "<body>\n" +
+                    "\n" +
+                    "<h1>" + name + ", you signed up at Emotianali.</h1\n" +
+                    "<p>Heads of universe appreciate and greet you.</p>\n" +
+                    "<a href=\"https://emotianali.herokuapp.com/emotional_assessment/start\">Start emotional assessment</a>\n" +
+                    "<p>Dreamteam <3</p>\n" +
                     "</body>\n" +
                     "</html>");
             email.send();
