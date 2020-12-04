@@ -1,0 +1,37 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&family=Amatic+SC&family=Kaushan+Script&family=Mali&family=Merienda&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Padauk&display=swap');
+#welcome{
+    color: black;
+    padding-top: 6%;
+    font-family: 'Aclonica', sans-serif;
+    font-size: 350%;
+}
+.buttonN {
+    width: 20%;
+    text-decoration: none;
+    outline: none;
+    font-family: 'Padauk', sans-serif;
+    color: white;
+    font-size: 15px;
+    padding: 10px 15px;
+    margin: 10px 20px;
+    background-image: linear-gradient(to right, #8B0000 0%, #B22222 51%, #FF0000 100%);
+    background-size: 200% auto;
+    box-shadow: 0 0 20px rgba(0,0,0,.1);
+}
+.button {
+    color: #45A0A4;
+    background: -webkit-linear-gradient(right, #D3D3D3 0, #D3D3D3 33.3%, #DC143C 33.3%, #DC143C 66.6%, #58554B 66.6%, #58554B) bottom no-repeat;
+    background: -o-linear-gradient(right,#D3D3D3 0, #D3D3D3 33.3%, #DC143C 33.3%, #DC143C 66.6%, #58554B 66.6%, #58554B) bottom no-repeat;
+    background: linear-gradient(to right, #D3D3D3 0, #D3D3D3 33.3%, #DC143C 33.3%, #DC143C 66.6%, #58554B 66.6%, #58554B) bottom no-repeat;
+    background-size: 70% 5px;
+    width: 20%;
+    text-decoration: none;
+    outline: none;
+    font-family: 'Padauk', sans-serif;
+    color: black;
+    font-size: 23px;
+    padding: 10px 15px;
+    margin: 10px 20px;
+}
