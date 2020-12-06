@@ -6,18 +6,18 @@
     <link href="../static/css/password_check.css" rel="stylesheet" type="text/css" media="all" />
     <link href="../static/css/style_index.css" rel="stylesheet" type="text/css" media="all" />
 </head>
-<body>
+<body  style="text-align: center;" >
 <div>
     <form method="POST" th:modelAttribute="userForm">
         <h2>Personal area</h2>
-        <div>Profile image:
+        <div >Profile image:
             <br>
             <div>
                 <div th:if="${currentUser.getImageLink().length() != 0}">
                     <img width="512px" th:src="${currentUser.getImageLink()}" src="" alt="Profile image">
                 </div>
                 <div th:unless="${currentUser.getImageLink().length() != 0}">
-                    <img width="512px" src="../public/img/userPicture.png" alt="Profile image">
+                    <img width="200px" src="../public/img/userPicture.png" alt="Profile image">
                 </div>
             </div>
             <br>
@@ -89,15 +89,15 @@
             <p>Enter current password for submission</p>
             <p th:text="${error}"></p>
         </div>
-        <button type="submit">Submit</button>
+        <button class="buttonN" type="submit">Submit</button>
     </form>
     <div>
         <form action="/personal_area/delete_account">
-            <button>Delete account</button>
+            <button class="buttonN">Delete account</button>
         </form>
     </div>
     <a href="/">Main</a>
-    <div>
+
         <h1>Your assessments:</h1>
         <div th:each="record : ${currentUser.getRecords()}">
             <ul>
