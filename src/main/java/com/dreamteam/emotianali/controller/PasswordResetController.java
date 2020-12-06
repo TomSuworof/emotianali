@@ -27,8 +27,8 @@ public class PasswordResetController {
         return "password_reset";
     }
 
-    @GetMapping("/password_reset/change_password")
-    public String checkValidity(@RequestParam String id, Model model) {
+    @GetMapping("/password_reset/change_password/{id}")
+    public String checkValidity(@PathVariable(name = "id") String id, Model model) {
         if (passwordResetService.isRequestValid(id)) {
             model.addAttribute("secretQuestion", passwordResetService.getSecretQuestion(id));
             model.addAttribute("id", id);
