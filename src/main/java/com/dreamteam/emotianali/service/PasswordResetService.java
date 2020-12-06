@@ -26,7 +26,7 @@ public class PasswordResetService {
             email = requiredUser.getEmail();
             passwordResetRepository.save(new PasswordResetRequest(id, username, created));
 
-            String link = "https://emotianali.herokuapp.com/password_reset/change_password/" + id;
+            String link = "https://emotianali.herokuapp.com/password_reset/change_password?id=" + id;
 
             return mailService.send(email, "password_change", link);
 
