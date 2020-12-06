@@ -16,6 +16,10 @@ body{
     text-align: center;
     font-family: 'Padauk', sans-serif;
 }
+
+#footer {
+    vertical-align: bottom;
+}
 .arrow-7 {
     margin: 40px auto 10px auto;
     width: 38px;
