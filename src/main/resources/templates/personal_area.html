@@ -13,7 +13,12 @@
         <div>Profile image:
             <br>
             <div>
-                <img width="512px" th:src="${currentUser.getImageLink()}" alt="Profile image">
+                <div th:if="${currentUser.getImageLink().length() != 0}">
+                    <img width="512px" th:src="${currentUser.getImageLink()}" src="" alt="Profile image">
+                </div>
+                <div th:unless="${currentUser.getImageLink().length() != 0}">
+                    <img width="512px" src="../public/img/userPicture.png" alt="Profile image">
+                </div>
             </div>
             <br>
             <label>
