@@ -9,9 +9,7 @@
 }
 
 body{
-    height: 700px;
     background: radial-gradient(white, #DCDCDC);
-
 }
 #main {
     text-align: center;
