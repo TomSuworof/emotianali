@@ -4,19 +4,20 @@
     <meta charset="utf-8">
     <title>Analytics</title>
     <link rel="stylesheet" type="text/css">
-    <link href="/static/css/style_index.css" rel="stylesheet" type="text/css" media="all" />
-    <style>
+    <link href="../static/css/style_index.css" rel="stylesheet" type="text/css" media="all" />
+    <style >
         table, td, th {
             border-bottom: 1px solid;
             border-left: 1px solid;
-            vertical-align: top;
+            vertical-align: center;
+
         }
     </style>
 </head>
 
-<body>
-<div>
-    <table>
+<body id="main">
+<div  >
+    <table class="table">
         <tr>
             <th>ID</th>
             <th>Username</th>
@@ -49,14 +50,14 @@
     </div>
 </div>
 <div>
-    <div>
+    <div >
         <form action="/analyst" method="post">
             <input type="hidden" name="action" value="get_full_info"/>
-            <button type="submit">Get full info</button>
+            <button class="assess"type="submit">Get full info</button>
         </form>
         <form action="/analyst" method="post">
             <input type="hidden" name="action" value="get_average_info"/>
-            <button type="submit">Get average info</button>
+            <button class="assess" type="submit">Get average info</button>
         </form>
     </div>
     <div>
@@ -68,23 +69,23 @@
             <div>
                 <form action="/analyst/statistics" method="post">
                     <input type="hidden" name="format" value="bar">
-                    <button type="submit">Bar chart</button>
+                    <button class="assess" type="submit">Bar chart</button>
                 </form>
                 <form action="/analyst/statistics" method="post">
                     <input type="hidden" name="format" value="pie">
-                    <button type="submit">Pie chart</button>
+                    <button class="assess" type="submit">Pie chart</button>
                 </form>
                 <form action="/analyst/statistics" method="post">
                     <input type="hidden" name="format" value="radar">
-                    <button type="submit">Radar chart</button>
+                    <button  class="assess" type="submit">Radar chart</button>
                 </form>
                 <form action="/analyst/statistics" method="post">
                     <input type="hidden" name="format" value="excel">
-                    <button type="submit">Excel File</button>
+                    <button class="assess" type="submit">Excel File</button>
                 </form>
                 <form action="/analyst/statistics" method="post">
                     <input type="hidden" name="format" value="csv">
-                    <button type="submit">CSV File</button>
+                    <button class="assess" type="submit">CSV File</button>
                 </form>
             </div>
             <div th:if="${image} != null">
