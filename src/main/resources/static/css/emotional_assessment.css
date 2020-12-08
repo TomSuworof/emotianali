@@ -34,13 +34,13 @@ a {
 }
 
 .post-caption-container {
-    float: right;
+    float: left;
     width: 70%;
 /*    тут стиль для описания поста - НИКАК ИНАЧЕ*/
 }
 
 .post-button-container {
-    float: left;
+    float: right;
     width: 29%;
 }
 
