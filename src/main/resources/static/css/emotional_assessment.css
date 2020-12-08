@@ -21,13 +21,12 @@ a {
 .posts {
     display: inline-block;
     list-style: none;
-    margin: 0;
-    padding: 0;
     vertical-align: center;
-   text-align: left;
+    text-align: left;
 }
 
 .post {
+    width: 100%;
     display: inline-block;
     vertical-align: center;
     padding: 4px;
