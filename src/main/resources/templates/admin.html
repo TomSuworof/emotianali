@@ -5,8 +5,8 @@
     <title>Admin</title>
     <link rel="stylesheet" type="text/css">
     <link href="/static/css/style_index.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/static/css/table_style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/static/css/admin.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="/static/css/table_style.css.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
 <div>
@@ -52,7 +52,7 @@
     <div>
         <form action="/admin" method="post">
             <input type="hidden" name="action" value="get_full_info"/>
-            <button type="submit">Get full info</button>
+            <button type="submit" class="beauty-button">Get full info</button>
         </form>
     </div>
     <div>
@@ -63,7 +63,7 @@
         <div th:if="${header != null}">
             <form action="/admin/statistics" method="post">
                 <input type="hidden" name="format" value="excel">
-                <button type="submit">Excel File</button>
+                <button type="submit" class="simple-red-button">Excel File</button>
             </form>
             <div th:if="${filename} != null">
                 <a href="/admin/statistics/file" download>File</a>
