@@ -19,7 +19,7 @@ a {
 }
 
 .posts, ul {
-    display: inline-block;
+    display: block;
     list-style: none;
     vertical-align: center;
     text-align: left;
