@@ -4,19 +4,11 @@
     <meta charset="utf-8">
     <title>Analytics</title>
     <link rel="stylesheet" type="text/css">
-    <link href="../static/css/style_index.css" rel="stylesheet" type="text/css" media="all" />
-    <style >
-        table, td, th {
-            border-bottom: 1px solid;
-            border-left: 1px solid;
-            vertical-align: center;
-
-        }
-    </style>
+    <link href="/static/css/style_index.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/static/css/analyst.css" rel="stylesheet" type="text/css" media="all" />
 </head>
-
 <body id="main">
-<div  >
+<div>
     <table class="table">
         <tr>
             <th>ID</th>
@@ -50,10 +42,10 @@
     </div>
 </div>
 <div>
-    <div >
+    <div>
         <form action="/analyst" method="post">
             <input type="hidden" name="action" value="get_full_info"/>
-            <button class="assess"type="submit">Get full info</button>
+            <button class="assess" type="submit">Get full info</button>
         </form>
         <form action="/analyst" method="post">
             <input type="hidden" name="action" value="get_average_info"/>
@@ -89,7 +81,7 @@
                 </form>
             </div>
             <div th:if="${image} != null">
-                <img th:src="*{'data:image/jpg;base64,'+ image}" alt="Image of chart">
+                <img th:src="*{'data:image/jpg;base64,'+ image}" alt="Image of chart" src="">
             </div>
             <div th:if="${filenameXLSX} != null">
                 <a href="/analyst/statistics/xlsx" download>File</a>
