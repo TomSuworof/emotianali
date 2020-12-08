@@ -11,27 +11,27 @@
     <h1 id="welcome">Welcome to Emotional assessment!</h1>
     <div >
         <form action="/emotional_assessment/start">
-            <button class="button">Start emotional assessment</button>
+            <button class="beauty-button">Start emotional assessment</button>
         </form>
     </div>
     <div th:if="${show_personal_area}">
         <form action="/personal_area">
-            <button class="button">Personal area</button>
+            <button class="beauty-button">Personal area</button>
         </form>
     </div>
     <div th:if="${show_logout}">
         <form action="/logout">
-            <button class="button">Logout</button>
+            <button class="beauty-button">Logout</button>
         </form>
     </div>
     <div th:if="${show_admin_page}">
         <form action="/admin">
-            <button class="button">Admin</button>
+            <button class="beauty-button">Admin</button>
         </form>
     </div>
     <div th:if="${show_analyst_page}">
         <form action="/analyst">
-            <button class="button">Analyst</button>
+            <button class="beauty-button">Analyst</button>
         </form>
     </div>
     <div id="footer">
