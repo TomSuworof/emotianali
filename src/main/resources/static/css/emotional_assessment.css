@@ -33,20 +33,23 @@ a {
     padding: 4px;
 }
 
-.post-caption {
+.post-caption-container {
     width: 70%;
 /*    тут стиль для описания поста - НИКАК ИНАЧЕ*/
 }
 
-.post-button {
-    width: 10%;
+.post-button-container {
+    width: 29%;
+}
+
+.assess {
     text-decoration: none;
     outline: none;
     font-family: 'Padauk', sans-serif;
     color: white;
     font-size: 15px;
-    padding: 5px 10px;
-    margin: 10px 15px;
+    /*padding: 5px 10px;*/
+    /*margin: 10px 15px;*/
     background-image: linear-gradient(to right, #8B0000 0%, #B22222 51%,#B22222 100%);
     background-size: 100% auto;
     box-shadow: 0 0 20px rgba(0,0,0,.1);

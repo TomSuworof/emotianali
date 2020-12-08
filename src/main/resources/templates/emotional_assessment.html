@@ -54,10 +54,10 @@
                 <div class="post">
                     <form action="/emotional_assessment/start">
                         <input name="text" type="hidden" th:value="${post.getCaption()}">
-                        <div class="post-caption">
+                        <div class="post-caption-container">
                             <p th:text="${post.getCaption()}"></p>
                         </div>
-                        <div class="post-button">
+                        <div class="post-button-container">
                             <button class="assess" type="submit">Assess</button>
                         </div>
                     </form>
