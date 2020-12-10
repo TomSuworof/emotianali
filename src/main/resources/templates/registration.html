@@ -7,10 +7,9 @@
     <link href="/static/css/registration.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
-<div id = "main">
+<div class="main">
     <form method="POST" th:modelAttribute="userForm">
-
-        <h2 id = "welcome">Sign up</h2>
+        <h2 class="welcome">Sign up</h2>
         <div>Profile image:
             <br>
             <label>
@@ -87,7 +86,9 @@
         </div>
         <button type="submit" class="simple-red-button">Sign up</button>
     </form>
-    <a href="/">Main</a>
+    <div class="footer">
+        <a href="/">Main</a>
+    </div>
 </div>
 </body>
 </html>

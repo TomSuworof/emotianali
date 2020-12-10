@@ -14,8 +14,8 @@
     <span></span>
     <span></span>
 </div>
-<div id="main" >
-    <h2 id="welcome">Emotional assessment </h2>
+<div class="main" >
+    <h2 class="welcome">Emotional assessment </h2>
     <div>
         <p>I do not have an Instagram account, let me check this text:</p>
         <form action="/emotional_assessment/start">
@@ -34,7 +34,7 @@
             </ul>
         </div>
         <div class="advices">
-            <h1 th:if="${advices} != null">Advices</h1>
+            <h1 class="advices-header" th:if="${advices} != null">Advices</h1>
             <ul th:each="advice : ${advices}">
                 <li  style="list-style-type: none;" >
                     <p th:text="${advice}"></p>

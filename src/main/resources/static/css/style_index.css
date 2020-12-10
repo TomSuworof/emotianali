@@ -1,7 +1,7 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Aclonica&family=Amatic+SC&family=Kaushan+Script&family=Mali&family=Merienda&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Padauk&display=swap');
-#welcome{
+
+.welcome{
     color: black;
     padding: 20px;
     font-family: 'Aclonica', sans-serif;
@@ -14,21 +14,23 @@ html, body {
 
 body{
     background: radial-gradient(white, #DCDCDC);
-}
-
-#main {
-    text-align: center;
     font-family: 'Padauk', sans-serif;
 }
 
-#footer {
+.main {
+    text-align: center;
+}
+
+.footer {
     vertical-align: bottom;
 }
+
 .arrow-7 {
     margin: 40px auto 10px auto;
     width: 38px;
     height: 100px;
 }
+
 .arrow-7 span {
     display: block;
     width: 25px;
@@ -39,12 +41,15 @@ body{
     margin: -16px 0;
     animation: arrow-7 2s infinite;
 }
+
 .arrow-7 span:nth-child(2){
     animation-delay: -0.2s;
 }
+
 .arrow-7 span:nth-child(3){
     animation-delay: -0.4s;
 }
+
 @keyframes arrow-7 {
     0%{
         opacity: 0;
@@ -61,10 +66,10 @@ body{
 }
 
 .beauty-button {
-    color: #45A0A4;
+    /*color: #45A0A4;*/
     background: -webkit-linear-gradient(right, #D3D3D3 0, #D3D3D3 33.3%, #DC143C 33.3%, #DC143C 66.6%, #58554B 66.6%, #58554B) bottom no-repeat;
-    background: -o-linear-gradient(right,#D3D3D3 0, #D3D3D3 33.3%, #DC143C 33.3%, #DC143C 66.6%, #58554B 66.6%, #58554B) bottom no-repeat;
-    background: linear-gradient(to right, #D3D3D3 0, #D3D3D3 33.3%, #DC143C 33.3%, #DC143C 66.6%, #58554B 66.6%, #58554B) bottom no-repeat;
+    /*background: -o-linear-gradient(right,#D3D3D3 0, #D3D3D3 33.3%, #DC143C 33.3%, #DC143C 66.6%, #58554B 66.6%, #58554B) bottom no-repeat;*/
+    /*background: linear-gradient(to right, #D3D3D3 0, #D3D3D3 33.3%, #DC143C 33.3%, #DC143C 66.6%, #58554B 66.6%, #58554B) bottom no-repeat;*/
     background-size: 70% 5px;
     width: 20%;
     text-decoration: none;

@@ -5,12 +5,13 @@
     <title>Personal area</title>
     <link href="/static/css/password_check.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/static/css/style_index.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/static/css/personal_area.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
 <div>
     <form method="POST" th:modelAttribute="userForm">
-        <h2>Personal area</h2>
-        <div >Profile image:
+        <h1 class="welcome">Personal area</h1>
+        <div>Profile image:
             <br>
             <div>
                 <div th:if="${currentUser.getImageLink().length() != 0}">
@@ -86,8 +87,10 @@
                     <input type="password" name="passwordNewConfirm" placeholder="Confirm your new password">
                 </label>
             </div>
-            <p>Enter current password for submission</p>
-            <p th:text="${error}"></p>
+            <div class="reminder">
+                <p>Enter current password for submission</p>
+                <p th:text="${error}"></p>
+            </div>
         </div>
         <button class="simple-red-button" type="submit">Submit</button>
     </form>
@@ -97,7 +100,7 @@
         </form>
     </div>
     <a href="/">Main</a>
-
+    <div class="user-assignments">
         <h1>Your assessments:</h1>
         <div th:each="record : ${currentUser.getRecords()}">
             <ul>

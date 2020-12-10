@@ -4,48 +4,56 @@
     <meta charset="utf-8">
     <title>Admin</title>
     <link rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.accordion.css">
     <link href="/static/css/style_index.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/static/css/table_style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/static/css/admin.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
-<div>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Password</th>
-            <th>Roles</th>
-        </tr>
-            <tr th:each="user : ${allUsers}">
-                <td th:text="${user.id}"></td>
-                <td th:text="${user.username}"></td>
-                <td th:text="${user.password}"></td>
-                <td>
-                    <ul th:each="role: ${user.roles}">
-                        <li th:text="${role.getName()}"></li>
-                    </ul>
-                </td>
-                <td>
-                    <form action="/admin" method="post">
-                        <input type="hidden" name="userId" th:value="${user.id}"/>
-                        <input type="hidden" name="action" value="delete"/>
-                        <button type="submit" class="simple-red-button">Delete (block)</button>
-                    </form>
-                    <form action="/admin" method="post">
-                        <input type="hidden" name="userId" th:value="${user.id}"/>
-                        <input type="hidden" name="action" value="make_analyst"/>
-                        <button type="submit" class="simple-red-button">Make analyst</button>
-                    </form>
-                    <form action="/admin" method="post">
-                        <input type="hidden" name="userId" th:value="${user.id}"/>
-                        <input type="hidden" name="action" value="make_user"/>
-                        <button type="submit" class="simple-red-button">Make user</button>
-                    </form>
-                </td>
+<div class="table-block" data-accordion>
+    <div class="table-header" data-control>
+        <h1 class="welcome">Users</h1>
+    </div>
+    <div class="table" data-content>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Roles</th>
             </tr>
-    </table>
-    <p th:text="${error}"></p>
+                <tr th:each="user : ${allUsers}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.password}"></td>
+                    <td>
+                        <ul th:each="role: ${user.roles}">
+                            <li th:text="${role.getName()}"></li>
+                        </ul>
+                    </td>
+                    <td>
+                        <form action="/admin" method="post">
+                            <input type="hidden" name="userId" th:value="${user.id}"/>
+                            <input type="hidden" name="action" value="delete"/>
+                            <button type="submit" class="simple-red-button">Delete (block)</button>
+                        </form>
+                        <form action="/admin" method="post">
+                            <input type="hidden" name="userId" th:value="${user.id}"/>
+                            <input type="hidden" name="action" value="make_analyst"/>
+                            <button type="submit" class="simple-red-button">Make analyst</button>
+                        </form>
+                        <form action="/admin" method="post">
+                            <input type="hidden" name="userId" th:value="${user.id}"/>
+                            <input type="hidden" name="action" value="make_user"/>
+                            <button type="submit" class="simple-red-button">Make user</button>
+                        </form>
+                    </td>
+                </tr>
+        </table>
+        <p th:text="${error}"></p>
+    </div>
+</div>
+<div>
     <a href="/">Main</a>
 </div>
 <div>
@@ -55,8 +63,8 @@
             <button type="submit" class="beauty-button">Get full info</button>
         </form>
     </div>
-    <div>
-        <h2 th:text="${header}"></h2>
+    <div class="tones">
+        <h2 class="tones-header" th:text="${header}"></h2>
         <ul th:each="tone : ${allTones}">
             <li th:text="${tone.getToneName()} + ' ' + ${tone.getScore()}"></li>
         </ul>
@@ -71,5 +79,6 @@
         </div>
     </div>
 </div>
+<script src="/static/js/table_slider.js"></script>
 </body>
 </html>

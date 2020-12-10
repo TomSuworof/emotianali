@@ -4,39 +4,46 @@
     <meta charset="utf-8">
     <title>Analytics</title>
     <link rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.accordion.css">
     <link href="/static/css/style_index.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/static/css/analyst.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/static/css/table_style.css.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body id="main">
+<div class="table-block" data-accordion>
+    <div class="table-header" data-control>
+        <h1 class="welcome">Users</h1>
+    </div>
+    <div class="table" data-content>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Tones</th>
+            </tr>
+            <tr th:each="user : ${allUsers}">
+                <td th:text="${user.getId()}"></td>
+                <td th:text="${user.getUsername()}"></td>
+                <td>
+                    <ul th:each="tone : ${user.getTones()}">
+                        <li th:text="${tone.getToneName()} + ' ' + ${tone.getScore()}"></li>
+                    </ul>
+                </td>
+                <td>
+                    <form action="/analyst" method="post">
+                        <input type="hidden" name="username" th:value="${user.getUsername()}"/>
+                        <input type="hidden" name="action" value="get_info"/>
+                        <button type="submit">Get info</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
 <div>
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Tones</th>
-        </tr>
-        <tr th:each="user : ${allUsers}">
-            <td th:text="${user.getId()}"></td>
-            <td th:text="${user.getUsername()}"></td>
-            <td>
-                <ul th:each="tone : ${user.getTones()}">
-                    <li th:text="${tone.getToneName()} + ' ' + ${tone.getScore()}"></li>
-                </ul>
-            </td>
-
-            <td>
-                <form action="/analyst" method="post">
-                    <input type="hidden" name="username" th:value="${user.getUsername()}"/>
-                    <input type="hidden" name="action" value="get_info"/>
-                    <button type="submit">Get info</button>
-                </form>
-            </td>
-        </tr>
-    </table>
     <a href="/">Main</a>
-    <div>
-        <h2 th:text="${requiredUsername}"></h2>
+    <div class="tones">
+        <h2 class="tones-header" th:text="${requiredUsername}"></h2>
         <ul th:each="tone : ${tones}">
             <li th:text="${tone.getToneName()} + ' ' + ${tone.getScore()}"></li>
         </ul>
@@ -53,8 +60,8 @@
             <button class="assess" type="submit">Get average info</button>
         </form>
     </div>
-    <div>
-        <h2 th:text="${header}"></h2>
+    <div class="tones">
+        <h2 class="tones-header" th:text="${header}"></h2>
         <ul th:each="tone : ${allTones}">
             <li th:text="${tone.getToneName()} + ' ' + ${tone.getScore()}"></li>
         </ul>
@@ -93,5 +100,6 @@
         </div>
     </div>
 </div>
+<script src="/static/js/table_slider.js"></script>
 </body>
 </html>
