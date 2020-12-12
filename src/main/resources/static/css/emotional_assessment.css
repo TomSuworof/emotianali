@@ -1,13 +1,25 @@
-a {
+.main-link {
     color: black;
     font-size: 150%
 }
 
+.field-for-no-account {
+    width: 100%;
+}
+
+.textarea-wrapper {
+    display: block;
+}
+
+textarea {
+    width: 90%;
+}
+
 .arrow-7 {
-    position:absolute;
-    left:20px;
-    top:0;
-    margin-top:0
+    position: absolute;
+    left: 20px;
+    top: 0;
+    margin-top: 0
 }
 
 .tone-name, .tone-score {
