@@ -15,12 +15,7 @@ textarea {
     width: 90%;
 }
 
-.arrow-7 {
-    position: absolute;
-    left: 20px;
-    top: 0;
-    margin-top: 0
-}
+
 
 .tone-name, .tone-score {
     list-style-type: none;

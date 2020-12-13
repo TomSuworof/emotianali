@@ -20,6 +20,59 @@ td {
 th:first-child, td:first-child {
     text-align: left;
 }
+.tabs {
+    min-width: 520px;
+    max-width: 800px;
+    padding: 0px;
+    margin: 0 auto;
+}
+
+section {
+    height: 0px;
+    background: #fff;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    margin: -1px 0px 0px 0px;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.2s;
+}
+
+table{
+    width: 100%;
+}
+
+.tabs > input {
+    display: none;
+}
+
+.tabs > label {
+    display: block;
+    padding: 7px 15px;
+    font-weight: 600;
+    text-align: center;
+    color: #aaa;
+    border: 1px solid #ddd;
+    background: #ffffff;
+}
+
+.tabs > label:hover {
+    color: #888;
+    cursor: pointer;
+    background: #fff;
+}
+
+.tabs > input:checked + label {
+    color: #555;
+    background: #fff;
+}
+
+#tab1:checked ~ #content-tab1{
+    height: 400px;
+    background: #fcffe0;
+}
 
 .table-header {
     cursor: pointer;
