@@ -1,9 +1,7 @@
-/* тут будет расположение и стиль для аналитика. ТАБЛИЦА В ДРУГОМ ФАЙЛЕ */
-
 .tones-header {
     font-family: 'Aclonica', sans-serif;
 }
-.main-link {
-    color: black;
-    font-size: 150%
+
+.accordion-header {
+    cursor: pointer;
 }

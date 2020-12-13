@@ -23,16 +23,16 @@ th:first-child, td:first-child {
 .tabs {
     min-width: 520px;
     max-width: 800px;
-    padding: 0px;
+    padding: 0;
     margin: 0 auto;
 }
 
 section {
-    height: 0px;
+    height: 0;
     background: #fff;
     border: 1px solid #ddd;
     overflow: hidden;
-    margin: -1px 0px 0px 0px;
+    margin: -1px 0 0 0;
     -webkit-transition: 0.5s;
     -moz-transition: 0.5s;
     -ms-transition: 0.5s;
@@ -72,8 +72,4 @@ table{
 #tab1:checked ~ #content-tab1{
     height: 400px;
     background: #fcffe0;
-}
-
-.table-header {
-    cursor: pointer;
 }

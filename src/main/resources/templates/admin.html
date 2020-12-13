@@ -11,11 +11,14 @@
     <link href="/static/css/admin.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
-<div class="table-block">
-    <div class="table-header" onclick="accordion()">
+<div>
+    <a class="main-link" href="/">Main</a>
+</div>
+<div class="accordion-block">
+    <div class="accordion-header" onclick="accordion()">
         <h1 class="welcome">Users</h1>
     </div>
-    <div class="table">
+    <div class="accordion-content">
         <table>
             <tr>
                 <th>ID</th>
@@ -59,10 +62,7 @@
     <hr>
 </div>
 <div>
-    <a class="main-link" href="/">Main</a>
-</div>
-<div>
-    <a class="main-link" href="https://developers.facebook.com/apps/376338823603982/roles/roles/">Managing Instagram testers</a>
+    <a href="https://developers.facebook.com/apps/376338823603982/roles/roles/">Managing Instagram testers</a>
 </div>
 <div>
     <div>
@@ -82,7 +82,7 @@
                 <button type="submit" class="simple-red-button">Excel File</button>
             </form>
             <div th:if="${filename} != null">
-                <a class="main-link" href="/admin/statistics/file" download>File</a>
+                <a href="/admin/statistics/file" download>File</a>
             </div>
         </div>
     </div>

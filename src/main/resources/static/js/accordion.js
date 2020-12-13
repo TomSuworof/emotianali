@@ -1,9 +1,3 @@
 function accordion() {
-    $(".table").slideToggle();
+    $(".accordion-content").slideToggle();
 }
-
-// $(".table-header").accordion({
-//    classes: {
-//        "."
-//    }
-// });

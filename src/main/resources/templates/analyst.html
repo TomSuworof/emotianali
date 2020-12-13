@@ -8,7 +8,10 @@
     <link href="/static/css/analyst.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/static/css/table_style.css" rel="stylesheet" type="text/css" media="all" />
 </head>
-<body id="main">
+<body>
+<div>
+    <a class="main-link" href="/">Main</a>
+</div>
 <div>
     <table class="table">
         <tr>
@@ -34,7 +37,6 @@
             </td>
         </tr>
     </table>
-    <a class="main-link" href="/">Main</a>
     <div>
         <h2 th:text="${requiredUsername}"></h2>
         <ul th:each="tone : ${tones}">
@@ -85,10 +87,10 @@
                 <img th:src="*{'data:image/jpg;base64,'+ image}" alt="Image of chart" src="">
             </div>
             <div th:if="${filenameXLSX} != null">
-                <a class="main-link" href="/analyst/statistics/xlsx" download>File</a>
+                <a href="/analyst/statistics/xlsx" download>File</a>
             </div>
             <div th:if="${filenameCSV} != null">
-                <a class="main-link" href="/analyst/statistics/csv" download>File</a>
+                <a href="/analyst/statistics/csv" download>File</a>
             </div>
         </div>
     </div>

@@ -8,11 +8,10 @@
     <link href="/static/css/emotional_assessment.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
-<div >
+<div>
     <a class="main-link" href="/">Main</a>
-
 </div>
-<div class="main" >
+<div class="centered">
     <h2 class="welcome">Emotional assessment </h2>
     <div>
         <div class="field-for-no-account">
@@ -30,7 +29,7 @@
         <div>
             <ul th:each="tone : ${result}">
                 <li class="tone-name"><h2 th:text="${tone.getToneName()}"></h2></li>
-                <li class="tone-score"><h3 th:text="${tone.getScore()}"></h3></li>
+                <li class="tone-score"><h2 th:text="${tone.getScore()}"></h2></li>
             </ul>
         </div>
         <div class="advices">
@@ -66,7 +65,7 @@
         </ul>
     </div>
 </div>
-<div class="main footer">
+<div class="centered footer">
     <p>I have an Instagram account, but I am not a tester:</p>
     <a href="mailto:dreamteam-99@mail.ru?subject=Tester request&body=Hi! I want to become a tester. Here is my username: ">Send a request</a>
 </div>

@@ -1,3 +1,11 @@
 .reminder {
     border: #DC143C;
 }
+
+.tones-header {
+    font-family: 'Aclonica', sans-serif;
+}
+
+.accordion-header {
+    cursor: pointer;
+}

@@ -1,7 +1,7 @@
-.main-link {
-    color: black;
-    font-size: 150%
-}
+/*.main-link {*/
+/*    color: black;*/
+/*    font-size: 150%*/
+/*}*/
 
 .field-for-no-account {
     width: 100%;
@@ -14,8 +14,6 @@
 textarea {
     width: 90%;
 }
-
-
 
 .tone-name, .tone-score {
     list-style-type: none;

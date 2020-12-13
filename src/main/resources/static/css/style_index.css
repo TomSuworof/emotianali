@@ -1,7 +1,7 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Aclonica&family=Amatic+SC&family=Kaushan+Script&family=Mali&family=Merienda&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Padauk&display=swap');
-#welcome{
+
+.welcome{
     color: black;
     padding: 20px;
     font-family: 'Aclonica', sans-serif;
@@ -11,35 +11,36 @@
 html, body {
     height: 100%;
 }
+
 .main-link {
+    text-decoration: none;
+    padding-left: 5px;
     color: black;
     font-size: 150%
 }
+
 body{
     background: radial-gradient(white, #DCDCDC);
-}
-
-#main {
-    text-align: center;
     font-family: 'Padauk', sans-serif;
 }
 
-#footer {
+.centered {
+    text-align: center;
+}
+
+.footer {
     vertical-align: bottom;
 }
 
 
 .beauty-button {
-    color: #45A0A4;
+    color: black;
     background: -webkit-linear-gradient(right, #D3D3D3 0, #D3D3D3 33.3%, #DC143C 33.3%, #DC143C 66.6%, #58554B 66.6%, #58554B) bottom no-repeat;
-    background: -o-linear-gradient(right,#D3D3D3 0, #D3D3D3 33.3%, #DC143C 33.3%, #DC143C 66.6%, #58554B 66.6%, #58554B) bottom no-repeat;
-    background: linear-gradient(to right, #D3D3D3 0, #D3D3D3 33.3%, #DC143C 33.3%, #DC143C 66.6%, #58554B 66.6%, #58554B) bottom no-repeat;
     background-size: 70% 5px;
     width: 20%;
     text-decoration: none;
     outline: none;
     font-family: 'Padauk', sans-serif;
-    color: black;
     font-size: 23px;
     padding: 10px 15px;
     margin: 10px 20px;
@@ -47,7 +48,6 @@ body{
 .beauty-button:hover {background-size: 100% 5px;}
 
 .simple-red-button {
-    /*width: 20%; - из-за этого ломалась таблица админа*/
     text-decoration: none;
     outline: none;
     font-family: 'Padauk', sans-serif;
