@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>Analytics</title>
     <link rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="/static/js/accordion.js"></script>
     <link href="/static/css/style_index.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/static/css/analyst.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/static/css/table_style.css" rel="stylesheet" type="text/css" media="all" />
@@ -12,47 +14,54 @@
 <div>
     <a class="main-link" href="/">Main</a>
 </div>
-<div>
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Tones</th>
-        </tr>
-        <tr th:each="user : ${allUsers}">
-            <td th:text="${user.getId()}"></td>
-            <td th:text="${user.getUsername()}"></td>
-            <td>
-                <ul th:each="tone : ${user.getTones()}">
-                    <li th:text="${tone.getToneName()} + ' ' + ${tone.getScore()}"></li>
-                </ul>
-            </td>
-
-            <td>
-                <form action="/analyst" method="post">
-                    <input type="hidden" name="username" th:value="${user.getUsername()}"/>
-                    <input type="hidden" name="action" value="get_info"/>
-                    <button type="submit">Get info</button>
-                </form>
-            </td>
-        </tr>
-    </table>
-    <div>
-        <h2 th:text="${requiredUsername}"></h2>
-        <ul th:each="tone : ${tones}">
-            <li th:text="${tone.getToneName()} + ' ' + ${tone.getScore()}"></li>
-        </ul>
+<div class="accordion-block">
+    <div class="accordion-header" onclick="accordion()">
+        <h1 class="welcome">Users</h1>
     </div>
+    <div class="accordion-content">
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Tones</th>
+            </tr>
+            <tr th:each="user : ${allUsers}">
+                <td th:text="${user.getId()}"></td>
+                <td th:text="${user.getUsername()}"></td>
+                <td>
+                    <ul th:each="tone : ${user.getTones()}">
+                        <li th:text="${tone.getToneName()} + ' ' + ${tone.getScore()}"></li>
+                    </ul>
+                </td>
+                <td>
+                    <form action="/analyst" method="post">
+                        <input type="hidden" name="username" th:value="${user.getUsername()}"/>
+                        <input type="hidden" name="action" value="get_info"/>
+                        <button type="submit" class="simple-red-button">Get info</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div>
+    <hr>
+</div>
+<div>
+    <h2 class="tones-header" th:text="${requiredUsername}"></h2>
+    <ul th:each="tone : ${tones}">
+        <li th:text="${tone.getToneName()} + ' ' + ${tone.getScore()}"></li>
+    </ul>
 </div>
 <div>
     <div>
         <form action="/analyst" method="post">
             <input type="hidden" name="action" value="get_full_info"/>
-            <button class="assess" type="submit">Get full info</button>
+            <button class="simple-red-button" type="submit">Get full info</button>
         </form>
         <form action="/analyst" method="post">
             <input type="hidden" name="action" value="get_average_info"/>
-            <button class="assess" type="submit">Get average info</button>
+            <button class="simple-red-button" type="submit">Get average info</button>
         </form>
     </div>
     <div>
@@ -64,23 +73,23 @@
             <div>
                 <form action="/analyst/statistics" method="post">
                     <input type="hidden" name="format" value="bar">
-                    <button class="assess" type="submit">Bar chart</button>
+                    <button class="simple-red-button" type="submit">Bar chart</button>
                 </form>
                 <form action="/analyst/statistics" method="post">
                     <input type="hidden" name="format" value="pie">
-                    <button class="assess" type="submit">Pie chart</button>
+                    <button class="simple-red-button" type="submit">Pie chart</button>
                 </form>
                 <form action="/analyst/statistics" method="post">
                     <input type="hidden" name="format" value="radar">
-                    <button  class="assess" type="submit">Radar chart</button>
+                    <button  class="simple-red-button" type="submit">Radar chart</button>
                 </form>
                 <form action="/analyst/statistics" method="post">
                     <input type="hidden" name="format" value="excel">
-                    <button class="assess" type="submit">Excel File</button>
+                    <button class="simple-red-button" type="submit">Excel File</button>
                 </form>
                 <form action="/analyst/statistics" method="post">
                     <input type="hidden" name="format" value="csv">
-                    <button class="assess" type="submit">CSV File</button>
+                    <button class="simple-red-button" type="submit">CSV File</button>
                 </form>
             </div>
             <div th:if="${image} != null">
